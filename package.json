@@ -1,0 +1,11 @@
+{
+  "name": "talk-now",
+  "version": "1.0.0",
+  "description": "A hassle-free peer-to-peer web communication (chat, video and audio) in the browser",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jermie Domingo",
+  "license": "ISC"
+}
