@@ -101,7 +101,6 @@ module.exports = (app, express) => {
 
 				if(err) {
 					res.send(err);
-
 				}
 
 				if(!room){
@@ -132,6 +131,19 @@ module.exports = (app, express) => {
 						});
 					}
 			});
+	})
+
+
+	.delete(jwtMiddleware, (req, res) => {
+
+		Room.remove({name: req.params.name}, function(err, user){
+
+				if(err) res.send(err);
+
+				res.json({message: 'Successfully deleted'});
+			})
+
+
 	});
 
 	// route to authenticate a room request (POST http://localhost:8080/api/authenticate)
@@ -141,7 +153,13 @@ module.exports = (app, express) => {
 			name: req.body.name
 		}).select('name members password').exec(function(err, room){
 
-			if(err) throw err;
+			if(err) {
+				console.log('Error in authentication: ', err);
+				res.json({
+					success: false,
+					message: 'Authentication failed. Something went wrong.'
+				});
+			}
 
 			//if no room with that name was found
 			if(!room){
@@ -160,7 +178,6 @@ module.exports = (app, express) => {
 					});
 				} else {
 
-
 					// if room 
 					// create a token
 					var token = jwt.sign({
@@ -177,14 +194,9 @@ module.exports = (app, express) => {
 						message: 'Enjoy your token',
 						token: token
 					});
-
-					
 				}
 			}
-
-
 		});
-
 	});
 
 
