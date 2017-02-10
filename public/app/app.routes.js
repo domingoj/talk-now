@@ -8,7 +8,10 @@ angular.module('app.routes', ['ngRoute'])
 
 	// home page route
 	.when('/', {
-		templateUrl: 'app/views/pages/home.html'
+		templateUrl: 'app/views/pages/home.html',
+		controller: 'homeController',
+			controllerAs: 'home'
+			
 	});
 
 

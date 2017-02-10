@@ -1,0 +1,39 @@
+'use strict';
+
+// grab the packages that we need for the room model
+let mongoose = require('mongoose'); //for working with our database
+let Schema = mongoose.Schema;
+let bcrypt = require('bcrypt-nodejs');
+
+//User Schema
+let RoomSchema = new Schema({
+	name: { type: String, required: true, index: { unique: true }},
+	owner: { type: String, required: true},
+	password: { type: String, select: false },
+	members: {type: Array}
+});
+
+RoomSchema.pre('save', function(next){
+	let room = this;
+
+	// hash the password only if the password has been changed or room is new
+	if(!room.isModified('password')) return next;
+
+	// generate the hash
+	bcrypt.hash(room.password, null, null, (err, hash) => {
+		if(err) return next(err);
+
+        // change the password to the hashed version
+        room.password = hash;
+		next();
+	})
+});
+
+// method to compare a given password with the database hash
+RoomSchema.methods.comparePassword = function(password){ 
+	var room = this;
+	return bcrypt.compareSync(password, room.password);
+};
+
+// return the model
+module.exports = mongoose.model('Room', RoomSchema);

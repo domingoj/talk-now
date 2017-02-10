@@ -4,7 +4,8 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let morgan = require('morgan');
-
+let mongoose = require('mongoose'); 
+let config = require('./config');
 let path = require('path');
 
 //APP CONFIGURATION ---------------
@@ -25,9 +26,16 @@ app.use(function(req, res, next){
 //log all requests to the console
 app.use(morgan('dev'));
 
+//connect to our database
+mongoose.connect(config.database);
+
 // set static files location
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
+
+let apiRoutes = require('./app/routes/api')(app,express);
+
+app.use('/api', apiRoutes);
 
 // MAIN CATCH ALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
@@ -38,5 +46,5 @@ res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 
 // START THE SERVER
 // ===============================
-app.listen(3000);
-console.log('Magic happens on port ', 3000);
+app.listen(config.port);
+console.log('Magic happens on port ', config.port);

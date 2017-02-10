@@ -1,1 +1,61 @@
-Home
+<html>
+
+<!-- Trigger the create a room modal with a button -->
+<button type="button" data-toggle="modal" data-target="#createModal">Create a room</button>
+<!-- Trigger the join a room modal with a button -->
+<button type="button" data-toggle="modal" data-target="#joinModal">Join a room</button>
+
+
+
+
+<!-- Create a room modal -->
+<div id="createModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create a Room</h4>
+      </div>
+      <div class="modal-body">
+        <label for="roomName">Room Name: </label> <input type="text" name="roomName"><br/>
+        <label for="yourName">Your Name: </label> <input type="text" name="yourName"><br/>
+        <label for="roomPassword">Password(Optional): </label> <input type="password" name="roomPassword">
+    	<p>The room url will be: http://talknow.com/room1-by-jermie</p>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.createRoom()">Create</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Join a room modal -->
+<div id="joinModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Join a Room</h4>
+      </div>
+      <div class="modal-body">
+         <label for="roomName">Room Name: </label> <input type="text" name="roomName"><br/>
+        <label for="yourName">Your Name: </label> <input type="text" name="yourName"><br/>
+        <label for="roomPassword">Password: </label> <input type="password" name="roomPassword">
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.joinRoom()">Join</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</html>
