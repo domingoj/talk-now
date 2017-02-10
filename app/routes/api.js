@@ -47,7 +47,7 @@ module.exports = (app, express) => {
 	apiRouter.route('/rooms/:name')
 
 	.get((req, res)=>{
-			Room.findById(req.params.room_name, function(err, room){
+			Room.find({'name':req.params.name}, function(err, room){
 
 				if(err) res.send(err);
 
