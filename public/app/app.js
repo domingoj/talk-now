@@ -2,4 +2,5 @@
 
 angular.module('talknowApp', [
 	'app.routes',
-	'HomeController']);
+	'HomeController',
+	'RoomController']);

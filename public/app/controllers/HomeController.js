@@ -2,18 +2,19 @@
 
 angular.module('HomeController', [])
 
-.controller('homeController', function($scope){
+.controller('homeController', function($scope, $location){
 
 let self = this;
 
 self.createRoom = () => {
 
-	bootbox.alert('create a room');
+	$location.path('/rooms/room1');
+
 }
 
 self.joinRoom = () => {
 
-	bootbox.alert('join a room');
+$location.path('/rooms/room1');
 }
 
 });

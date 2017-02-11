@@ -1,11 +1,29 @@
-<html>
+<div class="jumbotron">
+	<div class="container">
 
-<!-- Trigger the create a room modal with a button -->
-<button type="button" data-toggle="modal" data-target="#createModal">Create a room</button>
-<!-- Trigger the join a room modal with a button -->
-<button type="button" data-toggle="modal" data-target="#joinModal">Join a room</button>
+		<div class="row">
+			<div class="col-md-12">
+		        <h1>Hassle-Free Hangouts and Meetings.</h1>
+		        <hr/>
+		        <p>Talk Now! is a hassle-free video call & chat application for you and your group right in your browser. Just find a room and start talking. That simple.</p>
 
+		        <!--BUTTONS-->
+		        <div class="row">
+			        <div class="col-md-4 col-md-offset-2">
+			            <!-- Trigger the create a room modal with a button -->
+						<a class="btn btn-lg btn-primary btn-block round" role="button" data-toggle="modal" data-target="#createModal" role="button">Create a room</a>
+			        </div>
+			         <div class="col-md-4">
+			            <!-- Trigger the create a room modal with a button -->
+						<a class="btn btn-lg btn-primary btn-block round" role="button" data-toggle="modal" data-target="#joinModal" role="button">Join a room</a>
+			        </div>
+		        </div>
+		        <!--END BUTTONS-->
+	        </div>
 
+	      </div>
+	</div>
+</div>
 
 
 <!-- Create a room modal -->
@@ -19,11 +37,25 @@
         <h4 class="modal-title">Create a Room</h4>
       </div>
       <div class="modal-body">
-        <label for="roomName">Room Name: </label> <input type="text" name="roomName"><br/>
-        <label for="yourName">Your Name: </label> <input type="text" name="yourName"><br/>
-        <label for="roomPassword">Password(Optional): </label> <input type="password" name="roomPassword">
-    	<p>The room url will be: http://talknow.com/roomname</p>
+      	<div class="form-group">
+		    <label for="exampleInputEmail1">Room name</label>
+		    <input type="email" class="form-control" id="roomName" placeholder="Enter room name">
+		    <small id="nameHep" class="form-text text-muted">Be unique! E.g. gallileo_nov1</small>
+	  	</div>
+
+	  	<div class="form-group">
+		    <label for="exampleInputPassword1">Room Password(Optional)</label>
+		    <input type="password" class="form-control" id="roomPassword" placeholder="Password">
+		    <small id="passwordHelp" class="form-text text-muted">Optional if you are creative with your room name. But recommended nonetheless.</small>
+		 </div>
+
+	  	<div class="form-group">
+		    <label for="exampleInputEmail1">Your name</label>
+		    <input type="email" class="form-control" id="roomName" placeholder="Enter your name">
+		    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
+	  	</div>
       </div>
+
       <div class="modal-footer">
        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.createRoom()">Create</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -45,9 +77,23 @@
         <h4 class="modal-title">Join a Room</h4>
       </div>
       <div class="modal-body">
-         <label for="roomName">Room Name: </label> <input type="text" name="roomName"><br/>
-        <label for="yourName">Your Name: </label> <input type="text" name="yourName"><br/>
-        <label for="roomPassword">Password: </label> <input type="password" name="roomPassword">
+        <div class="form-group">
+		    <label for="exampleInputEmail1">Room name</label>
+		    <input type="email" class="form-control" id="roomName" placeholder="Enter room name">
+		    <small id="nameHep" class="form-text text-muted">Name of the room you wanna join in.</small>
+	  	</div>
+
+	  	<div class="form-group">
+		    <label for="exampleInputPassword1">Room Password</label>
+		    <input type="password" class="form-control" id="roomPassword" placeholder="Password">
+		    <small id="passwordHelp" class="form-text text-muted">If the room owner requires a password, put it here.</small>
+		 </div>
+
+	  	<div class="form-group">
+		    <label for="exampleInputEmail1">Your name</label>
+		    <input type="email" class="form-control" id="roomName" placeholder="Enter your name">
+		    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
+	  	</div>
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.joinRoom()">Join</button>
@@ -57,5 +103,3 @@
 
   </div>
 </div>
-
-</html>
