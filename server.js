@@ -1,12 +1,18 @@
 'use strict';
 
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
-let morgan = require('morgan');
-let mongoose = require('mongoose'); 
-let config = require('./config');
-let path = require('path');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const mongoose = require('mongoose'); 
+const config = require('./config');
+const path = require('path');
+
+const server = require('http').Server(app);
+const io = require('socket.io').listen(server);
+
+//for socket io event listeners
+require('./app/socket')(io, app);
 
 //APP CONFIGURATION ---------------
 //use body-parser so we can grab information from POST REQUESTS
@@ -47,5 +53,5 @@ res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
 
 // START THE SERVER
 // ===============================
-app.listen(config.port);
+server.listen(config.port);
 console.log('Magic happens on port ', config.port);
