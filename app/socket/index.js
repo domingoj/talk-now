@@ -6,8 +6,6 @@ module.exports = (io, app) => {
 
 		socket.on('join', data => {
 
-			
-
 			//ADD USER TO THE ROOM'S MEMBERS
 			//broadcast to update the list of users
 			//emit to update the list of users on the new joiner
@@ -23,7 +21,6 @@ module.exports = (io, app) => {
 
 		socket.on('chat message', data => {
 
-			socket.emit('chat message', data);
 			socket.broadcast.emit('chat message', data);
 
 		});
