@@ -3,8 +3,6 @@
 module.exports = (io, app) => {
 
 	io.of('/room').on('connection', socket => {
-		console.log('CONNECTED');
-
 
 		socket.on('join', data => {
 
@@ -25,7 +23,8 @@ module.exports = (io, app) => {
 
 		socket.on('chat message', data => {
 
-			//broadcast a new chat message 
+			socket.emit('chat message', data);
+			socket.broadcast.emit('chat message', data);
 
 		});
 
