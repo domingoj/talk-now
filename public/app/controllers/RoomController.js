@@ -13,13 +13,13 @@ angular.module('RoomController', [])
 	self.sendMessage = () => {
 
 		socket.emit('chat message', self.newMessage);
-		$('#messages').append($('<li>').text(msg));
+		$('#messages').append($('<li>').text(self.newMessage));
 		self.newMessage = '';
 	}
 
 	socket.on('chat message', function(msg){
 
-		 $('#messages').append($('<li>').text(msg));
+		 $('#messages').append($('<li>').text(self.newMessage));
 
 	});
 
