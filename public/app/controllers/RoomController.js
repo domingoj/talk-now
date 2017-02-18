@@ -8,13 +8,23 @@ angular.module('RoomController', [])
 
 	self.roomId = $routeParams.room_id;
 
+	self.newMessage = '';
+
 	let socket = io('http://localhost:3000' + '/room');
 
-	self.newMessage = '';
+	socket.on('connect', () => {
+			socket.emit('join', {
+				roomId: self.roomId
+			});
+		});
 
 	self.sendMessage = () => {
 
-		socket.emit('chat message', self.newMessage);
+		socket.emit('chat message', {
+			message: self.newMessage,
+			roomId: self.roomId	
+		});
+
 		$('#messages').append($('<li>').addClass('self').text(self.newMessage));
 		self.newMessage = '';
 	}

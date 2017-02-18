@@ -4,7 +4,10 @@ module.exports = (io, app) => {
 
 	io.of('/room').on('connection', socket => {
 
+
 		socket.on('join', data => {
+
+			socket.join(data.roomId);
 
 			//ADD USER TO THE ROOM'S MEMBERS
 			//broadcast to update the list of users
@@ -21,7 +24,8 @@ module.exports = (io, app) => {
 
 		socket.on('chat message', data => {
 
-			socket.broadcast.emit('chat message', data);
+			console.log(data.roomId);
+			socket.broadcast.to(data.roomId).emit('chat message', data.message);
 
 		});
 
