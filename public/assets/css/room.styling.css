@@ -3,11 +3,35 @@
 .main-content {
 	height: 100%;
 	font-family: "Calibri", "Roboto", sans-serif;
+	padding: 0;
 }
 
-#chatPanel{
+.videosPanel {
+	position: relative;
+	height: 84vh;
+	background-color: #f8f8f8;
+	
+}
+
+
+#remotesVideos video{
 	border-radius: 10px;
-  	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+	width: 100%;
+}
+
+#localVideo {
+	border-radius: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 150px;
+}
+
+
+
+.chatPanel, .videosPanel {
+	border-radius: 10px;
+  	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
 
 }
 
@@ -49,6 +73,47 @@
 }
 
 
- #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+#messages { 
+	list-style-type: none; margin: 0; padding: 0; 
+}
+
+#messages li {
+ padding: 5px 10px; 
+}
+
+#messages li.self{
+ text-align: right; 
+ color:Blue;
+}
+
+
+@media (max-width: 768px) {
+
+  .chatPanel {
+  	display: none;
+  }
+
+  #remotesVideos{
+	border-radius: 10px;
+	width: 100%;
+	height: 50%;
+}
+
+
+  #localVideo {
+  	border-radius: 10px;
+    height: 50%;
+  	position: relative;
+  	width: 100%;
+  }
+
+  video#localVideo {
+  	border-radius: 10px;
+   
+  }
+
+
+}
+
+
+
