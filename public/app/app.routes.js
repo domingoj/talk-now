@@ -15,7 +15,7 @@ angular.module('app.routes', ['ngRoute'])
 	})
 
 	//room route
-	.when('/rooms/:user_id', {
+	.when('/rooms/:room_id', {
 		templateUrl: 'app/views/pages/room.html',
 		controller: 'roomController',
 			controllerAs: 'room'

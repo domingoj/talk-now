@@ -1,9 +1,11 @@
-angular.module('roomService',[])
+'use strict';
+
+angular.module('RoomService', [])
 
 .factory('Room', function($http){
 
 	//create a new object
-	var roomFactory = {};
+	let roomFactory = {};
 
 	//get a room
 	roomFactory.get = function(roomName){

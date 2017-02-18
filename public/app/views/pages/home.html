@@ -39,25 +39,26 @@
       <div class="modal-body">
       	<div class="form-group">
 		    <label for="exampleInputEmail1">Room name</label>
-		    <input type="email" class="form-control" id="roomName" placeholder="Enter room name">
+		    <input type="form-text" class="form-control" id="roomName" placeholder="Enter room name" ng-model="home.create.roomName">
 		    <small id="nameHep" class="form-text text-muted">Be unique! E.g. gallileo_nov1</small>
 	  	</div>
 
 	  	<div class="form-group">
 		    <label for="exampleInputPassword1">Room Password(Optional)</label>
-		    <input type="password" class="form-control" id="roomPassword" placeholder="Password">
+		    <input type="password" class="form-control" id="roomPassword" placeholder="Password" ng-model="home.create.password">
 		    <small id="passwordHelp" class="form-text text-muted">Optional if you are creative with your room name. But recommended nonetheless.</small>
 		 </div>
 
 	  	<div class="form-group">
 		    <label for="exampleInputEmail1">Your name</label>
-		    <input type="email" class="form-control" id="roomName" placeholder="Enter your name">
+		    <input type="form-text" class="form-control" id="roomName" placeholder="Enter your name" ng-model="home.create.userName">
 		    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
 	  	</div>
       </div>
 
       <div class="modal-footer">
-       <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.createRoom()">Create</button>
+      {{home.validationMessage}}
+       <button type="button" class="btn btn-default" ng-click="home.createRoom()">Create</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
@@ -79,19 +80,19 @@
       <div class="modal-body">
         <div class="form-group">
 		    <label for="exampleInputEmail1">Room name</label>
-		    <input type="email" class="form-control" id="roomName" placeholder="Enter room name">
+		    <input type="form-text" class="form-control" id="roomName" placeholder="Enter room name" ng-model="home.join.roomName">
 		    <small id="nameHep" class="form-text text-muted">Name of the room you wanna join in.</small>
 	  	</div>
 
 	  	<div class="form-group">
 		    <label for="exampleInputPassword1">Room Password</label>
-		    <input type="password" class="form-control" id="roomPassword" placeholder="Password">
+		    <input type="password" class="form-control" id="roomPassword" placeholder="Password" ng-model="home.join.password">
 		    <small id="passwordHelp" class="form-text text-muted">If the room owner requires a password, put it here.</small>
 		 </div>
 
 	  	<div class="form-group">
 		    <label for="exampleInputEmail1">Your name</label>
-		    <input type="email" class="form-control" id="roomName" placeholder="Enter your name">
+		    <input type="form-text" class="form-control" id="roomName" placeholder="Enter your name" ng-model="home.join.userName">
 		    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
 	  	</div>
       </div>

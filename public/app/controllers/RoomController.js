@@ -6,7 +6,7 @@ angular.module('RoomController', [])
 
 	let self = this;
 
-	let roomId = $routeParams.room_id;
+	self.roomId = $routeParams.room_id;
 
 	let socket = io('http://localhost:3000' + '/room');
 
@@ -40,7 +40,7 @@ angular.module('RoomController', [])
 	webrtc.on('readyToCall', function () {
   
   	// you can name it anything
-  	webrtc.joinRoom(roomId);
+  	webrtc.joinRoom(self.roomId);
 	});
 
 }]);

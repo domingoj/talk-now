@@ -1,4 +1,4 @@
-angular.module('authService',[])
+angular.module('AuthService',[])
 
 
 // ===================================================
@@ -10,7 +10,7 @@ angular.module('authService',[])
 .factory('Auth', function($http, $q, AuthToken){
 
 	//create Auth factory
-	var authFactory = {};
+	let authFactory = {};
 
 	//handle joining a room
 	authFactory.joinRoom = function(name, password){

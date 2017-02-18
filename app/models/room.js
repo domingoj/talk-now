@@ -16,22 +16,17 @@ let RoomSchema = new Schema({
 RoomSchema.pre('save', function(next){
 	
 	// hash the password only if the password has been changed or room is new
-	if(!this.isModified('password')) return next();
+	if(!this.isModified('password')) return next;
 
 	let room = this;
 
-	bcrypt.genSalt(14 /*<< Setting to 14 from 10 caused call to be 10x slower */, function(err, salt) {
-    
-    	if (err) return next(err);
+	// generate the hash
+	bcrypt.hash(room.password, null, null, function(err, hash){
+		if(err) return next(err);
 
-		// generate the hash
-		bcrypt.hash(room.password, salt, function(err, hash){
-			if(err) return next(err);
-
-	        // change the password to the hashed version
-	        room.password = hash;
-			next();
-		});
+        // change the password to the hashed version
+        room.password = hash;
+		next();
 	});
 });
 

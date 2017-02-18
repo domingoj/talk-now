@@ -54,8 +54,8 @@ module.exports = (app, express) => {
 			let room = new Room();
 			// set the rooms information (comes from the request)
 
-			room.name = req.body.name;
-			room.owner = req.body.owner;
+			room.name = req.body.roomName;
+			room.owner = req.body.userName;
 			room.password = req.body.password;
 
 			room.save((err) => {
@@ -64,17 +64,22 @@ module.exports = (app, express) => {
 
 					//duplicate entry
 					if(err.code == 11000) {
-						return res.json({ success: false, message: 'The room you requested is already in use. Try another name.'});
-						} else{
-							return res.send(err);
-						}
+						return res.json({ 
+							success: false, 
+							message: 'The room you requested is already in use. Try another name.',
+							messageCode: 11000
+							});
+					} else{
+						return res.send(err);
+					}
 						
 				return err;
 
 				} else {
 					res.json({
 						success: true,
-						message: 'Room Created!'
+						message: 'Room Created!',
+						roomName: room.name
 					});
 				}		
 			})
