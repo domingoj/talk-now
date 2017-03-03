@@ -4,7 +4,6 @@ module.exports = (io, app) => {
 
 	io.of('/room').on('connection', socket => {
 
-
 		socket.on('join', data => {
 
 			socket.join(data.roomId);
@@ -24,7 +23,6 @@ module.exports = (io, app) => {
 
 		socket.on('chat message', data => {
 
-			console.log(data.roomId);
 			socket.broadcast.to(data.roomId).emit('chat message', data.message);
 
 		});
