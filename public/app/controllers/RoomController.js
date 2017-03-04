@@ -29,12 +29,15 @@ angular.module('RoomController', [])
 		});
 
 		$('#messages').append($('<li>').addClass('self').text(self.newMessage));
+
 		self.newMessage = '';
+		$('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
 	}
 
 	socket.on('chat message', function(data){
 
-		 $('#messages').append($('<li>').text(data.user + ": " + data.message));
+		 $('#messages').append($('<li>').addClass('others').html('<b>' + data.user + "</b> : " + data.message));
+		  $('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
 
 	});
 
@@ -54,7 +57,7 @@ angular.module('RoomController', [])
 
 	// a peer video has been added
 webrtc.on('videoAdded', function (video, peer) {
-    console.log('video added', peer);
+
     var remotes = document.getElementById('remotes');
     if (remotes) {
         var container = document.createElement('div');
@@ -71,7 +74,7 @@ webrtc.on('videoAdded', function (video, peer) {
 
 // a peer video was removed
 webrtc.on('videoRemoved', function (video, peer) {
-    console.log('video removed ', peer);
+
     var remotes = document.getElementById('remotes');
     var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
     if (remotes && el) {

@@ -4,7 +4,7 @@ angular.module('UserService',[])
 
 .service('User', function() {
 
-	let userName = 'awesome-but-unknown-user';
+	let userName = 'awesome-user';
       
 	return {
 	    getUser: function () {

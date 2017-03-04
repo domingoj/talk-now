@@ -81,21 +81,38 @@
 
 
 #messages { 
-	list-style-type: none; margin: 0; padding: 0; 
+	
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 65vh;
+  max-width: 100%;
+  overflow: scroll;
 }
 
 #messages li {
- padding: 5px 10px; 
+font-family: 'Roboto Mono', monospace;
+ padding: 5%; 
+ margin: 10px 5%;
+ border-radius: 10px;
+ color:#FFF;
+ word-wrap: break-word;
 }
 
 #messages li.self{
- text-align: right; 
- color:Blue;
+  text-align: right; 
+  background-color: #1a8cff;
+}
+
+#messages li.others{
+  text-align: left; 
+  background-color: #ff4d88;
 }
 
 
-@media (max-width: 970px) {
 
+@media (max-width: 970px) {
 
   .chatPanel {
   	display: none;
