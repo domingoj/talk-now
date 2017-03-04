@@ -8,9 +8,7 @@ let bcrypt = require('bcrypt-nodejs');
 //User Schema
 let RoomSchema = new Schema({
 	name: { type: String, required: true, index: { unique: true }},
-	owner: { type: String, required: true },
-	password: { type: String, select: false },
-	members: { type : Array , "default" : [] }
+	password: { type: String, select: false }
 });
 
 RoomSchema.pre('save', function(next){

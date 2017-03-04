@@ -20,7 +20,7 @@ angular.module('RoomService', [])
 	// update a room
 	roomFactory.update = function(roomName, roomData) { 
 		console.log(roomName);
-		console.log(userData);
+		console.log(roomData);
 		return $http.put('/api/rooms/' + roomName, roomData);
 	};
 

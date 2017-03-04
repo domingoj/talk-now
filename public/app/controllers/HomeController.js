@@ -2,7 +2,7 @@
 
 angular.module('HomeController', [])
 
-.controller('homeController', function($scope, $location, Room){
+.controller('homeController', function($scope, $location, Room, User){
 
 let self = this;
 
@@ -29,11 +29,15 @@ self.createRoom = () => {
 
 			if(data.success){
 
+
+console.log(User);
+				User.setUser(self.create.userName);
+
 				//hide the modal
 				$('#createModal').modal('hide');
 
 				//redirect to the room page
-				$location.path('/rooms/' + data.roomName);
+				$location.path('/rooms/' + data.room.name);
 			}
 
 			else {

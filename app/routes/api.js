@@ -55,7 +55,6 @@ module.exports = (app, express) => {
 			// set the rooms information (comes from the request)
 
 			room.name = req.body.roomName;
-			room.owner = req.body.userName;
 			room.password = req.body.password;
 
 			room.save((err) => {
@@ -79,7 +78,7 @@ module.exports = (app, express) => {
 					res.json({
 						success: true,
 						message: 'Room Created!',
-						roomName: room.name
+						room: room
 					});
 				}		
 			})
@@ -100,7 +99,7 @@ module.exports = (app, express) => {
 		});
 	})
 
-	//for updating specific room details like room name, owner, password & members
+	//for updating specific room details like room name, password 
 	.put(jwtMiddleware, (req, res) => {
 			Room.findOne({'name':req.params.name}, function(err, room){
 
@@ -119,8 +118,6 @@ module.exports = (app, express) => {
 						//update each room's info only if its new
 						if(req.body.name) room.name = req.body.name;
 						if(req.body.password) room.password = req.body.password;
-						if(req.body.username) room.members.push(req.body.username);
-						if(req.body.owner) room.owner = req.body.owner;
 
 						console.log(room);
 
@@ -156,7 +153,7 @@ module.exports = (app, express) => {
 
 		Room.findOne({
 			name: req.body.name
-		}).select('name members password').exec(function(err, room){
+		}).select('name password').exec(function(err, room){
 
 			if(err) {
 				console.log('Error in authentication: ', err);

@@ -23,7 +23,7 @@ module.exports = (io, app) => {
 
 		socket.on('chat message', data => {
 
-			socket.broadcast.to(data.roomId).emit('chat message', data.message);
+			socket.broadcast.to(data.roomId).emit('chat message', data);
 
 		});
 
