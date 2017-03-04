@@ -24,7 +24,7 @@
 			</div>
 			<div class="row" id="newChatMessageWindow">
 				<div class="col-md-8">
-					<textarea class="message_input" placeholder="Type your message here..." ng-model="room.newMessage"></textarea>
+					<textarea class="message_input" placeholder="Type your message here..." ng-model="room.newMessage" my-enter="room.sendMessage()"></textarea>
 				</div>
 				<div class="col-md-4">
 					<a class="btn btn-primary btn-block round" role="button" ng-click="room.sendMessage()">Send</a>

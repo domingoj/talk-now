@@ -36,8 +36,8 @@ angular.module('RoomController', [])
 
 	socket.on('chat message', function(data){
 
-		 $('#messages').append($('<li>').addClass('others').html('<b>' + data.user + "</b> : " + data.message));
-		  $('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
+		$('#messages').append($('<li>').addClass('others').html('<b>' + data.user + "</b> : " + data.message));
+		$('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
 
 	});
 
@@ -89,5 +89,20 @@ webrtc.on('videoRemoved', function (video, peer) {
   	webrtc.joinRoom(self.roomId);
 	});
 
-}]);
+}])
+
+// custom directive for 'Enter' press on the new chat box text area
+.directive('myEnter', function() {
+   return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.myEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
 
