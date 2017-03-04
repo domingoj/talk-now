@@ -8,7 +8,6 @@
 
 .videosPanel {
 	position: relative;
-  display: block;
   margin: 0 auto;
 	height: 84vh;
 	background-color: #f8f8f8;
@@ -18,47 +17,51 @@
 
 #remotes {
   height: 100%;
+  width: 100%;
 }
 
 .videoContainer {
-    position: relative;
-    height: 150px;
+  height: 100%;
+  width: 100%;
 }
 .videoContainer video {
-    height: 100%;
+    min-height: 100%;
+    max-width: 100%;
 }
 
 #localVideo {
 	border-radius: 10px;
-    position: absolute;
-    bottom:0px;
-    right: 0px;
-    width: 200px;
+  position: absolute;
+  bottom:0px;
+  right: 0px;
+  width: 200px;
 }
 
 .chatPanel, .videosPanel {
+  background: transparent;
 	border-radius: 10px;
-  	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 
 }
-
 .top_menu {
+
 	border-radius: 10px;
- 	background-color: #fff;
  	height: 8vh;
-    padding: 20px 0 15px;
+  padding: 20px 0 15px;
  	box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
 }
 
 .top_menu .title {
   text-align: center;
-  color: #bcbdc0;
-  font-size: 20px;
+  color: #FFF;
+  font-family: 'Baloo', cursive;
+  font-size: 25px;
 }
 
 #chatMessagesWindow {
 	height: 65vh;
-	background-color: #f8f8f8;
+  background-color: hsla(0,0%,100%,.7);
+  border: 1px;
 }
 
 #newChatMessageWindow {
@@ -72,13 +75,30 @@
 	border: none;
 	box-sizing: border-box;
 	outline-width: 0;
-  	color: gray;
-    width: 100%;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+  background-color: hsla(0,0%,100%,.5);
+  color: #000;
+  font-weight: 2px;
+  width: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  font-family: 'Roboto Mono', monospace;
 }
 
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    gray;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    gray;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    gray;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color:    gray;
+}
 
 #messages { 
 	
@@ -93,11 +113,12 @@
 
 #messages li {
 font-family: 'Roboto Mono', monospace;
- padding: 5%; 
- margin: 10px 5%;
- border-radius: 10px;
- color:#FFF;
- word-wrap: break-word;
+font-size: 15px;
+padding: 2%; 
+margin: 10px 5%;
+border-radius: 10px;
+color:#FFF;
+word-wrap: break-word;
 }
 
 #messages li.self{
@@ -110,8 +131,6 @@ font-family: 'Roboto Mono', monospace;
   background-color: #ff4d88;
 }
 
-
-
 @media (max-width: 970px) {
 
   .chatPanel {
@@ -120,7 +139,6 @@ font-family: 'Roboto Mono', monospace;
 
 
 }
-
 
 
 @media (max-width: 320px) {
