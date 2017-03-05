@@ -47,7 +47,7 @@ background-size: cover;
   border: none;
 }
 
-.navbar-default .navbar-brand {
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:visited {
   color: #FFF;
   font-family: 'Baloo', cursive;
   font-size: 30px;
@@ -58,7 +58,8 @@ background-size: cover;
       font-size: 15px;
 }
 
-.navbar-default .navbar-toggle {
+
+.navbar-default .navbar-toggle, .navbar-default .navbar-toggle:visited, .navbar-default .navbar-toggle:focus {
   color: #FFF;
   border-color: #FFF;
 }
@@ -68,6 +69,10 @@ background-size: cover;
   border-color: #1a8cff;
 }
 
+.navbar-default .navbar-toggle:focus {
+  background-color: transparent;
+  border-color: #1a8cff;
+}
 
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #fff;
