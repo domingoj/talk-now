@@ -9,13 +9,13 @@ Tech used so far:
 <li>other libs: SimpleWebRTC, socketio, etc.</li>
 </ul>
 
-Screenshots from 03/04/2017 (getting old by now - will take new ones once app is fairly decent):
+Screenshots from 03/05/2017 (getting old by now - will take new ones once app is fairly decent):
 
 Home page:<br/>
 
-<img width="600" alt="homepage_capture" src="https://cloud.githubusercontent.com/assets/17349825/23581122/e29e22f0-0127-11e7-8aea-9af3038d048d.png">
+<img width="600" alt="home_snapshot" src="https://cloud.githubusercontent.com/assets/17349825/23590350/84afc182-01f7-11e7-8393-2430d6930df2.png">
 
 Room page:<br/>
 
-<img width="600" alt="roompage_capture" src="https://cloud.githubusercontent.com/assets/17349825/23581121/e1dee606-0127-11e7-8dc3-dad561324b60.png">
+<img width="600" alt="room_snapshot" src="https://cloud.githubusercontent.com/assets/17349825/23590351/85ba7c34-01f7-11e7-9c67-3a779d6ea03d.png">
 
