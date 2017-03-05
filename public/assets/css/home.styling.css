@@ -10,7 +10,6 @@
 
 }
 
-
 #buttons {
 	margin-top: 25%;
 	text-align: center;
@@ -47,7 +46,6 @@
 @media (max-width: 970px) {
   #buttons {
 	margin-top: 10%;
-}
-
+	}
 }
 

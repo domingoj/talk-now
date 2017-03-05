@@ -1,6 +1,14 @@
 body { 
 
-background: url("../img/bg1.png") no-repeat center center fixed; 
+background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
+background: -webkit-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
+background: -moz-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
+background: -ms-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
+background: -o-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
+
+background-position: center center; 
+background-repeat: no-repeat;
+background-attachment: fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
