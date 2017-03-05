@@ -6,9 +6,10 @@ Tech used so far:
 <li>db: mongodb</li>
 <li>backend: express, node.js</li>
 <li>frontend: angular, bootstrap, html, css, js</li>
+<li>other libs: SimpleWebRTC, socketio, etc.</li>
 </ul>
 
-Screenshots as of March 4, 2017:
+Screenshots from 03/04/2017 (getting old by now - will take new ones once app is fairly decent):
 
 Home page:<br/>
 
