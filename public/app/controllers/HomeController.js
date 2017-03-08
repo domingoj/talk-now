@@ -29,9 +29,8 @@ self.createRoom = () => {
 
 			if(data.success){
 
-
-console.log(User);
 				User.setUser(self.create.userName);
+				User.setRoomPassword(self.create.password);
 
 				//hide the modal
 				$('#createModal').modal('hide');

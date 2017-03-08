@@ -9,6 +9,7 @@ angular.module('RoomController', [])
 	self.roomId = $routeParams.room_id;
 
 	self.user = User.getUser();
+  self.password = User.getRoomPassword();
 
 	self.newMessage = '';
 
