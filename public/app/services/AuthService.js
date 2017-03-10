@@ -13,13 +13,13 @@ angular.module('AuthService',[])
 	let authFactory = {};
 
 	//handle joining a room
-	authFactory.joinRoom = function(name, username, password){
+	authFactory.joinRoom = function(user){
 
 		// return the promise object and its data
 		return $http.post('/api/authenticate',{
-			roomName: name,
-			userName: username,
-			password: password
+			roomName: user.roomName,
+			userName: user.userName,
+			password: user.password
 			})
 			.then(function(response){
 				AuthToken.setToken(response.data.token);

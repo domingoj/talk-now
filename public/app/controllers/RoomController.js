@@ -18,8 +18,9 @@ angular.module('RoomController', [])
     let socket = io('http://localhost:3000' + '/room');
 
     socket.on('connect', () => {
+
         socket.emit('join', {
-          roomId: User.getRoom
+          roomId: User.getRoom()
         });
       });
 
@@ -28,7 +29,7 @@ angular.module('RoomController', [])
       socket.emit('chat message', {
         message: self.newMessage,
         roomId: User.getRoom(),
-        user: User.getUser()
+        user: User.getUserName()
       });
 
       $('#messages').append($('<li>').addClass('self').text(self.newMessage));
@@ -98,7 +99,7 @@ angular.module('RoomController', [])
     //TODO - if user is joining (not from the create page), show pop up for auth details
     //and save to the User service
 
-    Auth.joinRoom(User.getRoom(), User.getUser(), User.getRoomPassword())
+    Auth.joinRoom(User.getRoom(), User.getUserName(), User.getRoomPassword())
     .then(function(data){
 
       if(data.success){
