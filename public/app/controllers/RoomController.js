@@ -2,93 +2,125 @@
 
 angular.module('RoomController', [])
 
-.controller('roomController',['$scope','$routeParams', 'User', function($scope, $routeParams, User){
+.controller('roomController',['$scope','$routeParams', 'User', 'Auth', function($scope, $routeParams, User, Auth, AuthFactory){
 
-	let self = this;
+  let self = this;
+  self.newMessage = '';
 
-	self.roomId = $routeParams.room_id;
+  if(!User.getRoom()){
+    User.setRoom($routeParams.room_id);
+  }
 
-	self.user = User.getUser();
-  self.password = User.getRoomPassword();
+  self.roomName = User.getRoom();
 
-	self.newMessage = '';
+  function enableConnection() {
 
-	let socket = io('http://localhost:3000' + '/room');
+    let socket = io('http://localhost:3000' + '/room');
 
-	socket.on('connect', () => {
-			socket.emit('join', {
-				roomId: self.roomId
-			});
-		});
+    socket.on('connect', () => {
+        socket.emit('join', {
+          roomId: User.getRoom
+        });
+      });
 
-	self.sendMessage = () => {
+    self.sendMessage = () => {
 
-		socket.emit('chat message', {
-			message: self.newMessage,
-			roomId: self.roomId,
-			user: self.user
-		});
+      socket.emit('chat message', {
+        message: self.newMessage,
+        roomId: User.getRoom(),
+        user: User.getUser()
+      });
 
-		$('#messages').append($('<li>').addClass('self').text(self.newMessage));
+      $('#messages').append($('<li>').addClass('self').text(self.newMessage));
 
-		self.newMessage = '';
-		$('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
-	}
-
-	socket.on('chat message', function(data){
-
-		$('#messages').append($('<li>').addClass('others').html('<b>' + data.user + "</b> : " + data.message));
-		$('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
-
-	});
-
-	let webrtc = new SimpleWebRTC({
-	  	// the id/element dom element that will hold "our" video
-	  	localVideoEl: 'localVideo',
-  		
-  		// the id/element dom element that will hold remote videos
-  		remoteVideosEl: '',
-  		
-  		// immediately ask for camera access
-  		autoRequestMedia: true
-	});
-
-
-
-
-	// a peer video has been added
-webrtc.on('videoAdded', function (video, peer) {
-
-    var remotes = document.getElementById('remotes');
-    if (remotes) {
-        var container = document.createElement('div');
-        container.className = 'videoContainer';
-        container.id = 'container_' + webrtc.getDomId(peer);
-        container.appendChild(video);
-
-        // suppress contextmenu
-        video.oncontextmenu = function () { return false; };
-
-        remotes.appendChild(container);
+      self.newMessage = '';
+      $('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
     }
-});
 
-// a peer video was removed
-webrtc.on('videoRemoved', function (video, peer) {
+    socket.on('chat message', function(data){
 
-    var remotes = document.getElementById('remotes');
-    var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
-    if (remotes && el) {
-        remotes.removeChild(el);
-    }
-});
+      $('#messages').append($('<li>').addClass('others').html('<b>' + data.user + "</b> : " + data.message));
+      $('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
 
-	// we have to wait until it's ready
-	webrtc.on('readyToCall', function () {
-  
-  	// you can name it anything
-  	webrtc.joinRoom(self.roomId);
-	});
+    });
+
+    let webrtc = new SimpleWebRTC({
+        // the id/element dom element that will hold "our" video
+        localVideoEl: 'localVideo',
+        
+        // the id/element dom element that will hold remote videos
+        remoteVideosEl: '',
+        
+        // immediately ask for camera access
+        autoRequestMedia: true
+    });
+
+
+    // a peer video has been added
+    webrtc.on('videoAdded', function (video, peer) {
+
+      var remotes = document.getElementById('remotes');
+
+      if (remotes) {
+          var container = document.createElement('div');
+          container.className = 'videoContainer';
+          container.id = 'container_' + webrtc.getDomId(peer);
+          container.appendChild(video);
+
+          // suppress contextmenu
+          video.oncontextmenu = function () { return false; };
+
+          remotes.appendChild(container);
+        }
+    });
+
+    // a peer video was removed
+    webrtc.on('videoRemoved', function (video, peer) {
+
+        var remotes = document.getElementById('remotes');
+        var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
+        if (remotes && el) {
+            remotes.removeChild(el);
+        }
+    });
+
+    // we have to wait until it's ready
+    webrtc.on('readyToCall', function () {
+    
+      // you can name it anything
+      webrtc.joinRoom(User.getRoom);
+    });
+  }
+
+  //for user room authentication if the user isn't authenticated yet 
+  self.joinRoom = function(){
+
+    //TODO - if user is joining (not from the create page), show pop up for auth details
+    //and save to the User service
+
+    Auth.joinRoom(User.getRoom(), User.getUser(), User.getRoomPassword())
+    .then(function(data){
+
+      if(data.success){
+
+        enableConnection();
+
+      } else {
+        //TODO: popup for auth details again
+        alert('TODO: popup');
+      }
+    });
+  }
+
+  //check if there is an exisiting valid jwt token
+  if(Auth.isAuthenticated()){
+
+    //user is authenticated at this point
+    enableConnection();
+  } else {
+    //try to join the room
+    self.joinRoom();
+  }
 
 }])
 

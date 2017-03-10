@@ -11,15 +11,14 @@
 		<div class="col-md-4 chatPanel">
 
 			<div class="row top_menu">
-				<div class="title">{{room.roomId}} Chatroom</div>
+				<div class="title">{{room.roomName}} Chatroom</div>
 			</div>
 
 			<div class="row" id="chatMessagesWindow">
 				<ul id="messages">
 				</ul>
-
-				
 			</div>
+			
 			<div class="row" id="newChatMessageWindow">
 				<div class="col-md-8">
 					<textarea class="message_input" placeholder="Type your message here..." ng-model="room.newMessage" my-enter="room.sendMessage()"></textarea>

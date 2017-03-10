@@ -97,62 +97,13 @@ module.exports = (app, express) => {
 			//return that room
 			res.json(room);
 		});
-	})
-
-	//for updating specific room details like room name, password 
-	.put(jwtMiddleware, (req, res) => {
-			Room.findOne({'name':req.params.name}, function(err, room){
-
-				if(err) {
-					res.send(err);
-				}
-
-				if(!room){
-					res.json({
-						success: false,
-						message: 'Room not found.'
-					})
-
-				} else if(room){
-
-						//update each room's info only if its new
-						if(req.body.name) room.name = req.body.name;
-						if(req.body.password) room.password = req.body.password;
-
-						console.log(room);
-
-						//save the room
-						room.save((err) => {
-							if(err) res.send(err);
-
-							//return a message
-							res.json({ 
-								success: true,
-								message: 'Room updated!' 
-							});
-						});
-					}
-			});
-	})
-
-
-	.delete(jwtMiddleware, (req, res) => {
-
-		Room.remove({name: req.params.name}, function(err, user){
-
-				if(err) res.send(err);
-
-				res.json({message: 'Successfully deleted'});
-			})
-
-
 	});
 
 	// route to authenticate a room request (POST http://localhost:8080/api/authenticate)
 	apiRouter.post('/authenticate', function(req, res){
 
 		Room.findOne({
-			name: req.body.name
+			name: req.body.roomName
 		}).select('name password').exec(function(err, room){
 
 			if(err) {
@@ -162,6 +113,8 @@ module.exports = (app, express) => {
 					message: 'Authentication failed. Something went wrong.'
 				});
 			}
+
+			console.log(room);
 
 			//if no room with that name was found
 			if(!room){
@@ -183,7 +136,8 @@ module.exports = (app, express) => {
 					// if room 
 					// create a token
 					var token = jwt.sign({
-						name: room.name
+						roomName: room.name,
+						userName: req.body.name
 						}, 
 						config.superSecret, 
 						{

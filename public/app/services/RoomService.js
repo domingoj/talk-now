@@ -17,18 +17,6 @@ angular.module('RoomService', [])
 		return $http.post('/api/rooms/', roomData);
 	};
 
-	// update a room
-	roomFactory.update = function(roomName, roomData) { 
-		console.log(roomName);
-		console.log(roomData);
-		return $http.put('/api/rooms/' + roomName, roomData);
-	};
-
-  	// delete a user
-	roomFactory.delete = function(roomName) { 
-		return $http.delete('/api/rooms/' + id);
-	};
-
   	// return our entire userFactory object
 	return roomFactory;
 

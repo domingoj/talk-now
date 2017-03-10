@@ -5,9 +5,16 @@ angular.module('UserService',[])
 .service('User', function() {
 
 	let userName = 'awesome-user';
+	let roomName = '';
 	let roomPassword = '';
-      
+
 	return {
+		getRoom: function () {
+	        return roomName;
+	    },
+	    setRoom: function (value) {
+	        roomName = value;
+	    },
 	    getUser: function () {
 	        return userName;
 	    },

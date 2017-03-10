@@ -30,6 +30,7 @@ self.createRoom = () => {
 			if(data.success){
 
 				User.setUser(self.create.userName);
+				User.setRoom(self.create.roomName);
 				User.setRoomPassword(self.create.password);
 
 				//hide the modal
