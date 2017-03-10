@@ -1,7 +1,7 @@
 # talk-now
-*In Progress* A real time web application for hassle-free video call &amp; chat in the browser using WebRTC and socket.io.
+<b>*In Progress*</b> A real time web application for hassle-free video call &amp; chat in the browser using WebRTC and socket.io.
 
-Tech used so far: 
+#Tech stack used so far: 
 <ul>
 <li>db: mongodb</li>
 <li>backend: express, node.js</li>
@@ -9,7 +9,15 @@ Tech used so far:
 <li>other libs: SimpleWebRTC, socketio, etc.</li>
 </ul>
 
-Screenshots from 03/05/2017 (getting old by now - will take new ones once app is fairly decent):
+#Installation
+1. You must have nodejs and mongodb installed on your computer
+2. run `npm install` on the project root folder
+3. run `mongod`
+4. run `nodemon` 
+  (if u dont have nodemon, run `npm install -g nodemon` to install globally or npm `install --save-dev nodemon` to install locally.
+5. Enjoy this unfinished project. (it will run on `localhost:3000` by default)
+
+<b>Screenshots from 03/05/2017 </b> (getting old by now - will take new ones once app is fairly decent):
 
 Home page:<br/>
 
