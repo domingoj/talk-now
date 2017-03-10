@@ -13,8 +13,7 @@
 1. You must have nodejs and mongodb installed on your computer
 2. run `npm install` on the project root folder
 3. run `mongod`
-4. run `nodemon` 
-  (if u dont have nodemon, run `npm install -g nodemon` to install globally or npm `install --save-dev nodemon` to install locally.
+4. run `nodemon` (if u dont have nodemon, run `npm install -g nodemon` to install globally or `npm install --save-dev nodemon` to install locally.)
 5. Enjoy this unfinished project. (it will run on `localhost:3000` by default)
 
 <b>Screenshots from 03/05/2017 </b> (getting old by now - will take new ones once app is fairly decent):
