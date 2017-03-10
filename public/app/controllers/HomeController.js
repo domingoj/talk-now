@@ -70,7 +70,7 @@ angular.module('HomeController', [])
 
 	      } else {
 	        //TODO: popup for auth details again
-	        alert('nahh');
+	        self.validationMessage = data.message;
 	      }
 	    });
 	}

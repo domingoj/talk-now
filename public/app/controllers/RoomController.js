@@ -89,7 +89,7 @@ angular.module('RoomController', [])
     webrtc.on('readyToCall', function () {
     
       // you can name it anything
-      webrtc.joinRoom(User.getRoom);
+      webrtc.joinRoom(User.getRoom());
     });
   }
 

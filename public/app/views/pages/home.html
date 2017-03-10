@@ -84,7 +84,7 @@
         <div class="form-group">
 		    <label for="roomNameJoin">Room name</label>
 		    <input type="form-text" class="form-control" id="roomNameJoin" placeholder="Enter room name" ng-model="home.join.roomName">
-		    <small id="nameHep" class="form-text text-muted">Name of the room you wanna join in.</small>
+		    <small id="nameHelp" class="form-text text-muted">Name of the room you wanna join in.</small>
 	  	</div>
 
 	  	<div class="form-group">
@@ -100,7 +100,8 @@
 	  	</div>
       </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="home.joinRoom()">Join</button>
+       {{home.validationMessage}}
+       <button type="button" class="btn btn-default" ng-click="home.joinRoom()">Join</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
