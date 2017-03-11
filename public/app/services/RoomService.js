@@ -8,8 +8,8 @@ angular.module('RoomService', [])
 	let roomFactory = {};
 
 	//get a room
-	roomFactory.get = function(roomName){
-		return $http.get('/api/rooms/' + roomName);
+	roomFactory.get = function(name){
+		return $http.get('/api/rooms/' + name);
 	}
 
 	// create a room

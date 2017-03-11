@@ -20,8 +20,11 @@ angular.module('app.routes', ['ngRoute'])
 		controller: 'roomController',
 			controllerAs: 'room'
 			
-	});
+	})
 
+	.otherwise({
+        redirectTo: '/'
+    });
 
 	// get rid of the hash in the URL
 	$locationProvider.html5Mode(true);		

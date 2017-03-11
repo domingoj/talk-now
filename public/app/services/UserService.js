@@ -4,7 +4,7 @@ angular.module('UserService',[])
 
 .service('User', function() {
 
-	let userName = 'awesome-user';
+	let userName = '';
 	let roomName = '';
 	let roomPassword = '';
 
@@ -24,14 +24,22 @@ angular.module('UserService',[])
 	    getRoomPassword: function(){
 	    	return roomPassword;
 	    },
-	    setRoomPassword: function(password){
-	    	roomPassword = password;
+	    setRoomPassword: function(roomPassword){
+	    	roomPassword = roomPassword;
 	    },
 
 	    setUser: function(user){
 	    	userName = user.userName;
 	    	roomName = user.roomName;
-	    	roomPassword = user.password;
+	    	roomPassword = user.roomPassword;
+	    },
+
+	    getUser: function(){
+	    	return {
+	    		userName,
+	    		roomName,
+	    		roomPassword
+	    	}
 	    }
 	};
 

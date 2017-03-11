@@ -8,30 +8,30 @@ let bcrypt = require('bcrypt-nodejs');
 //User Schema
 let RoomSchema = new Schema({
 	name: { type: String, required: true, index: { unique: true }},
-	password: { type: String, select: false }
+	roomPassword: { type: String, select: false }
 });
 
 RoomSchema.pre('save', function(next){
 	
 	// hash the password only if the password has been changed or room is new
-	if(!this.isModified('password')) return next;
+	if(!this.isModified('roomPassword')) return next;
 
 	let room = this;
 
 	// generate the hash
-	bcrypt.hash(room.password, null, null, function(err, hash){
+	bcrypt.hash(room.roomPassword, null, null, function(err, hash){
 		if(err) return next(err);
 
         // change the password to the hashed version
-        room.password = hash;
+        room.roomPassword = hash;
 		next();
 	});
 });
 
 // method to compare a given password with the database hash
-RoomSchema.methods.comparePassword = function(password){ 
+RoomSchema.methods.comparePassword = function(roomPassword){ 
 	let room = this;
-	return bcrypt.compareSync(password, room.password);
+	return bcrypt.compareSync(roomPassword, room.roomPassword);
 };
 
 // return the model

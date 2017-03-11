@@ -2,7 +2,7 @@
 
 angular.module('RoomController', [])
 
-.controller('roomController',['$scope','$routeParams', 'User', 'Auth', function($scope, $routeParams, User, Auth, AuthFactory){
+.controller('roomController',['$scope','$routeParams', '$location', 'User', 'Auth', 'Room', function($scope, $routeParams, $location, User, Auth, Room){
 
   let self = this;
   self.newMessage = '';
@@ -96,33 +96,48 @@ angular.module('RoomController', [])
   //for user room authentication if the user isn't authenticated yet 
   self.joinRoom = function(){
 
-    //TODO - if user is joining (not from the create page), show pop up for auth details
-    //and save to the User service
+    if(!User.getUserName()) {
+       alert('TODO: popup no username');
+      return;
+    }
 
-    Auth.joinRoom(User.getRoom(), User.getUserName(), User.getRoomPassword())
+console.log(User.getUser());
+    Auth.joinRoom(User.getUser())
     .then(function(data){
 
+       
       if(data.success){
 
         enableConnection();
+        return;
 
       } else {
+
+        console.log(data);
         //TODO: popup for auth details again
         alert('TODO: popup');
       }
     });
   }
 
-  //check if there is an exisiting valid jwt token
-  if(Auth.isAuthenticated()){
+  Room.get(User.getRoom())
+    .then(function(result){
 
-    //user is authenticated at this point
-    enableConnection();
-  } else {
-    //try to join the room
-    self.joinRoom();
-  }
+      let data = result.data;
+      if(data.success){
 
+        //if room is present
+        //try to join the room
+        self.joinRoom();
+
+      } else {
+        $location.path('/');
+      }
+    });
+
+
+   
+  
 }])
 
 // custom directive for 'Enter' press on the new chat box text area

@@ -2,7 +2,6 @@
 
 //CALL THE PACKAGES ------------
 let Room = require('../../app/models/room');
-let jwt = require('jsonwebtoken');
 let config = require('../../config');
 
 
@@ -10,42 +9,6 @@ module.exports = (app, express) => {
 
 	// get an instance of the express router
 	let apiRouter = express.Router();
-
-	// route middleware to verify a token
-	let jwtMiddleware = function(req, res, next){
-
-		// check header or url parameters or post parameters for token
-		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-		// decode token
-		if(token){
-
-			// verifies secret and checks exp
-			jwt.verify(token, config.superSecret, function(err, decoded){
-
-				if(err){
-					return res.status(403).send({
-						success: false,
-						message:  'Failed to authenticate token.'
-					});
-				} else {
-					// if everything is good, save to request for use in other routes
-					req.decoded = decoded;
-
-					next();
-				}
-			})
-		} else {
-			
-			// if there is no token
-			// return an HTTP response of 403 (access forbidden) and an error message
-			return res.status(403).send({
-				success: false,
-				message: 'No token provided.'
-			});
-		}
-
-	};
 
 	apiRouter.route('/rooms/')
 
@@ -55,7 +18,7 @@ module.exports = (app, express) => {
 			// set the rooms information (comes from the request)
 
 			room.name = req.body.roomName;
-			room.password = req.body.password;
+			room.roomPassword = req.body.roomPassword;
 
 			room.save((err) => {
 
@@ -89,13 +52,30 @@ module.exports = (app, express) => {
 	apiRouter.route('/rooms/:name')
 
 	//get room details
-	.get(jwtMiddleware, (req, res)=> {
+	.get((req, res) => {
+
+		console.log('req params', req.params.name);
 		Room.findOne({'name':req.params.name}, function(err, room){
 
-			if(err) res.send(err);
+			if(err) res.json({
+				success: false,
+				message: err
+			});
 
-			//return that room
-			res.json(room);
+			if(!room) {
+				res.json({
+					success: false,
+					message: 'Room not found.'
+				})
+			} else {
+
+				//return that room
+				res.json({
+					success: true,
+					room: room
+				});
+			}
+
 		});
 	});
 
@@ -104,7 +84,7 @@ module.exports = (app, express) => {
 
 		Room.findOne({
 			name: req.body.roomName
-		}).select('name password').exec(function(err, room){
+		}).select('name roomPassword').exec(function(err, room){
 
 			if(err) {
 				console.log('Error in authentication: ', err);
@@ -114,8 +94,6 @@ module.exports = (app, express) => {
 				});
 			}
 
-			console.log(room);
-
 			//if no room with that name was found
 			if(!room){
 				res.json({
@@ -123,9 +101,8 @@ module.exports = (app, express) => {
 					message: 'Authentication failed. Room not found.'
 				})
 			} else if(room){
-
 				//check if password matches
-				var validPassword = room.comparePassword(req.body.password);
+				var validPassword = room.comparePassword(req.body.roomPassword);
 				if(!validPassword){
 					res.json({
 						success: false,
@@ -133,22 +110,10 @@ module.exports = (app, express) => {
 					});
 				} else {
 
-					// if room 
-					// create a token
-					var token = jwt.sign({
-						roomName: room.name,
-						userName: req.body.name
-						}, 
-						config.superSecret, 
-						{
-						expiresIn: '24h' // expires in 24 hours
-					});
-
 					// return the information including token as JSON
 					res.json({
 						success: true,
-						message: 'Enjoy your token',
-						token: token
+						message: 'Authenticated'
 					});
 				}
 			}

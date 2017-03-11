@@ -8,12 +8,12 @@ angular.module('HomeController', [])
 
 	self.create = {
 		roomName: '',
-		password: '',
+		roomPassword: '',
 		userName: ''
 	};
 	self.join = {
 		roomName: '',
-		password: '',
+		roomPassword: '',
 		userName: ''
 	};
 
@@ -29,6 +29,8 @@ angular.module('HomeController', [])
 				if(data.success){
 
 					User.setUser(self.create);
+
+					console.log(User.getRoomPassword());
 
 					//hide the modal
 					$('#createModal').modal('hide');
