@@ -48,10 +48,10 @@ angular.module('RoomController', [])
     let webrtc = new SimpleWebRTC({
         // the id/element dom element that will hold "our" video
         localVideoEl: 'localVideo',
-        
+
         // the id/element dom element that will hold remote videos
         remoteVideosEl: '',
-        
+
         // immediately ask for camera access
         autoRequestMedia: true
     });
@@ -87,13 +87,13 @@ angular.module('RoomController', [])
 
     // we have to wait until it's ready
     webrtc.on('readyToCall', function () {
-    
+
       // you can name it anything
       webrtc.joinRoom(User.getRoom());
     });
   }
 
-  //for user room authentication if the user isn't authenticated yet 
+  //for user room authentication if the user isn't authenticated yet
   self.joinRoom = function(){
 
     if(!User.getUserName()) {
@@ -105,7 +105,7 @@ console.log(User.getUser());
     Auth.joinRoom(User.getUser())
     .then(function(data){
 
-       
+
       if(data.success){
 
         enableConnection();
@@ -135,9 +135,11 @@ console.log(User.getUser());
       }
     });
 
+  document.querySelectorAll('video').onclick = function() {
+    console.log(document.querySelector('video').srcObject);
+}
 
-   
-  
+
 }])
 
 // custom directive for 'Enter' press on the new chat box text area
@@ -154,4 +156,3 @@ console.log(User.getUser());
         });
     };
 });
-

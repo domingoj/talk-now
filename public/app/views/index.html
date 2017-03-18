@@ -46,7 +46,7 @@
 
 <body ng-app="talknowApp">
 
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default" id="navigation">
 		<div class="container">
 			<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -65,12 +65,12 @@
 	            <li><a href="/">About</a></li>
 	            <li><a href="/TermsAndConditions/">Terms and Conditions</a></li>
 	          	</ul>
-          </div>	
+          </div>
 		</div>
 	</nav>
-	
+
 	<!-- ANGULAR VIEWS -->
-	<div ng-view></div>
+	<div ng-view id="content-window"></div>
 
 </body>
 </html>

@@ -1,5 +1,24 @@
+body {
+
+background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
+background-position: center center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+
+.navbar {
+    background: transparent;
+}
+
+
+
 #main-content{
-	
+
 	margin-top: 10px;
 	font-family: "Calibri", "Roboto", sans-serif;
 	padding: 0;
@@ -48,4 +67,3 @@
 	margin-top: 10%;
 	}
 }
-

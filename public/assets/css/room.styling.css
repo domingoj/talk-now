@@ -1,51 +1,83 @@
+.navbar {
+		background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		border-radius: 0;
+}
+
 
 .main-content {
-	height: 100%;
 	font-family: "Calibri", "Roboto", sans-serif;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#videos-panel {
+	position: relative;
+  margin: 0 auto;
+	height: 100%;
+	width: 100%;
+	background-color: #f8f8f8;
+  padding: 0px;
+	border: 1px solid black;
+
+}
+
+#selected-video {
+
+	width: 100%;
+	height: 75%;
+	border: 1px solid blue;
+}
+
+#videos-row{
+	text-align: center;
+	width: 100%;
+	height: 25%;
+	border:1px solid red;
 	padding: 0;
 }
 
-.videosPanel {
-	position: relative;
-  margin: 0 auto;
-	height: 84vh;
-	background-color: #f8f8f8;
-  padding: 0px;
-	
-}
-
 #remotes {
+	margin: 0;
+	display: inline-block;
   height: 100%;
-  width: 100%;
 }
 
-.videoContainer {
-  height: 100%;
-  width: 100%;
-}
-.videoContainer video {
-    min-height: 100%;
-    max-width: 100%;
+#remotes video {
+	height: 100%;
+	width: 200px;
 }
 
-#localVideo {
-	border-radius: 10px;
-  position: absolute;
-  bottom:0px;
-  right: 0px;
+#local-video {
+	display: inline-block;
+	height: 100%;
   width: 200px;
+	margin: 0;
 }
 
-.chatPanel, .videosPanel {
+/*simpleWebRTC div video container */
+.videoContainer {
+	display: inline-block;
+}
+
+#local-video video {
+
+	width: 200px;
+}
+
+.chatPanel {
+	display: none;
 
 	border-radius: 10px;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 
-}
-
-.videosPanel {
-
-  background-color: hsla(0,0%,100%,.7);
 }
 
 .top_menu {
@@ -105,8 +137,8 @@
   color:    gray;
 }
 
-#messages { 
-	
+#messages {
+
   position: relative;
   list-style: none;
   padding: 0;
@@ -119,7 +151,7 @@
 #messages li {
 font-family: 'Roboto Mono', monospace;
 font-size: 15px;
-padding: 2%; 
+padding: 2%;
 margin: 10px 5%;
 border-radius: 10px;
 color:#FFF;
@@ -127,12 +159,12 @@ word-wrap: break-word;
 }
 
 #messages li.self{
-  text-align: right; 
+  text-align: right;
   background-color: #1a8cff;
 }
 
 #messages li.others{
-  text-align: left; 
+  text-align: left;
   background-color: #ff4d88;
 }
 
@@ -173,11 +205,8 @@ word-wrap: break-word;
 
   video#localVideo {
   	border-radius: 10px;
-   
+
   }
 
 
 }
-
-
-

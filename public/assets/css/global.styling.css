@@ -1,20 +1,19 @@
-body { 
 
-background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
-background-position: center center; 
-background-repeat: no-repeat;
-background-attachment: fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+html, body {
+  height: 100%;
 }
+
 .navbar {
     margin-bottom: 0;
-    background: transparent;;
 }
 
+#navigation {
+  height: 7%;
+}
 
+#content-window {
+  height: 93%;
+}
 
 .btn {
     padding: 14px 24px;
@@ -23,20 +22,20 @@ background-size: cover;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
- 
+
 .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: 0 none;
 }
- 
+
 .btn-primary {
     background: #0099cc;
     color: #ffffff;
 }
- 
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
     background: #33a6cc;
 }
- 
+
 .btn-primary:active, .btn-primary.active {
     background: #007299;
     box-shadow: none;
