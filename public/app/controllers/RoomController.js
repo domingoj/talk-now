@@ -101,7 +101,6 @@ angular.module('RoomController', [])
       return;
     }
 
-console.log(User.getUser());
     Auth.joinRoom(User.getUser())
     .then(function(data){
 
@@ -135,10 +134,19 @@ console.log(User.getUser());
       }
     });
 
-  document.querySelectorAll('video').onclick = function() {
-    console.log(document.querySelector('video').srcObject);
-}
+    const changeSelectedVid = (e) => {
+      console.log(e);
+    }
+  let videotags = Array.from(document.getElementsByTagName('video'));
+console.log(videotags);
 
+  for(var i = 0; i < videotags.length; i++){
+    videotags[i].onclick = function() {
+
+      console.log('test vid click');
+
+    }
+  }
 
 }])
 
