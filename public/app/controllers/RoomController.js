@@ -134,19 +134,53 @@ angular.module('RoomController', [])
       }
     });
 
-    const changeSelectedVid = (e) => {
-      console.log(e);
-    }
+
+
   let videotags = Array.from(document.getElementsByTagName('video'));
-console.log(videotags);
+  let canvas = document.getElementById('selectedVideo');
+  let context = canvas.getContext('2d');
 
-  for(var i = 0; i < videotags.length; i++){
-    videotags[i].onclick = function() {
+  //for redrawing of the canvas to make it appear like a video
+  //http://stackoverflow.com/questions/24496605/how-can-i-show-the-same-html-5-video-twice-on-a-website-without-loading-it-twice
+  const updateSelectedVideo = (v,c,w,h) => {
 
-      console.log('test vid click');
+    if(v.paused || v.ended) return false;
+    c.drawImage(v,0,0,w,h);
+    setTimeout(updateBigVideo,20,v,c,w,h);
 
-    }
   }
+
+  //loops through all the video tags and adds a click listener to them
+  for(var i = 0; i < videotags.length; i++){
+
+    videotags[i].addEventListener('click', function(e) {
+
+      //grabs the clicked element 'target'
+      e = e || window.event;
+      let target = e.target || e.srcElement;
+
+      //for clearing the canvas on click of other elements
+      //http://stackoverflow.com/questions/9522341/how-to-redraw-canvas-every-250ms-without-flickering-between-each-redraw
+      //TODO: add click event listener to new videos once a new user joins
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      //take the height of the video
+      let cw = Math.floor(canvas.clientWidth);
+      let ch = Math.floor(canvas.clientHeight);
+      canvas.width = cw;
+      canvas.height = ch;
+
+      updateSelectedVideo(target,context,cw,ch);
+
+
+    }, false);
+  }
+
+
+
+
+
+
 
 }])
 
