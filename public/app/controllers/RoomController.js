@@ -146,7 +146,7 @@ angular.module('RoomController', [])
 
     if(v.paused || v.ended) return false;
     c.drawImage(v,0,0,w,h);
-    setTimeout(updateBigVideo,20,v,c,w,h);
+    setTimeout(updateSelectedVideo,20,v,c,w,h);
 
   }
 
