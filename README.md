@@ -9,7 +9,7 @@
 <li>other libs: SimpleWebRTC, socketio, etc.</li>
 </ul>
 
-# Installation
+# Installation (Project is in construction phase, check TODO.md)
 1. You must have nodejs and mongodb installed on your computer
 2. run `npm install` on the project root folder
 3. run `mongod`
