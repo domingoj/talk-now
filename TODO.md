@@ -4,8 +4,8 @@
 - [ ] Chat div to be made as a sliding sidebar
 - [ ] Going directly to the Room page should show popups for login.
 
-### Home page
+### HOME PAGE
 - [ ] Validation
 
-### Backend
+### BACKEND
 - [ ] Room deletion once empty
