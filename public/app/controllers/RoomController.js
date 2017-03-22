@@ -176,12 +176,6 @@ angular.module('RoomController', [])
     }, false);
   }
 
-
-
-
-
-
-
 }])
 
 // custom directive for 'Enter' press on the new chat box text area
