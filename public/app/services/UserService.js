@@ -24,8 +24,8 @@ angular.module('UserService',[])
 	    getRoomPassword: function(){
 	    	return roomPassword;
 	    },
-	    setRoomPassword: function(roomPassword){
-	    	roomPassword = roomPassword;
+	    setRoomPassword: function(value){
+	    	roomPassword = value;
 	    },
 
 	    setUser: function(user){

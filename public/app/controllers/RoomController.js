@@ -98,7 +98,7 @@ angular.module('RoomController', [])
   }
 
   self.joinRoomClick = () => {
-
+    
     User.setUserName(self.join.userName);
     User.setRoomPassword(self.join.roomPassword);
     self.joinRoom();
