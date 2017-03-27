@@ -85,14 +85,13 @@ canvas {
 	object-fit: contain;
 	height: 100%;
 }
-/*
+
 .chatPanel {
 	float: right;
 	height: 100%;
 	width: 20%;
 	border: 1px solid black;
-
-
+	display: none;
 }
 
 .top_menu {
@@ -182,4 +181,4 @@ word-wrap: break-word;
 #messages li.others{
   text-align: left;
   background-color: #ff4d88;
-}*/
+}

@@ -14,8 +14,7 @@
 				</div>
 			</div>
 
-		<!-- <div class="chatPanel">
-
+		<div class="chatPanel">
 			<div class="top_menu">
 				<div class="title">{{room.roomName}} Chatroom</div>
 			</div>
@@ -33,5 +32,39 @@
 					<a class="btn btn-primary btn-block round" role="button" ng-click="room.sendMessage()">Send</a>
 				</div>
 			</div>
-		</div> -->
+		</div>
+
+		<!-- Join a room modal -->
+		<div id="joinModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Join a Room</h4>
+		      </div>
+		      <div class="modal-body">
+
+				  	<div class="form-group">
+					    <label for="roomPasswordJoin">Room Password</label>
+					    <input type="password" class="form-control" id="roomPasswordJoin" placeholder="Password" ng-model="room.join.roomPassword">
+					    <small id="passwordHelp" class="form-text text-muted">If the room owner requires a password, put it here.</small>
+					 	</div>
+
+				  	<div class="form-group">
+					    <label for="yourNameJoin">Your name</label>
+					    <input type="form-text" class="form-control" id="yourNameJoin" placeholder="Enter your name" ng-model="room.join.userName">
+					    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
+				  	</div>
+		      </div>
+		      <div class="modal-footer">
+		       {{room.validationMessage}}
+		       <button type="button" class="btn btn-default" ng-click="room.joinRoomClick()">Join</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
 	</div>

@@ -71,11 +71,9 @@ angular.module('HomeController', [])
 		        $location.path('/rooms/' + User.getRoom());
 
 	      } else {
-	        //TODO: popup for auth details again
 	        self.validationMessage = data.message;
 	      }
 	    });
 	}
 
 });
-

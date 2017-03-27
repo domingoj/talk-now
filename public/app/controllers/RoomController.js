@@ -5,6 +5,10 @@ angular.module('RoomController', [])
 .controller('roomController',['$scope','$routeParams', '$location', 'User', 'Auth', 'Room', function($scope, $routeParams, $location, User, Auth, Room){
 
   let self = this;
+  self.join = {
+    userName: User.getUserName(),
+    roomPassword: User.getRoomPassword()
+  }
   self.newMessage = '';
 
   if(!User.getRoom()){
@@ -93,11 +97,19 @@ angular.module('RoomController', [])
     });
   }
 
+  self.joinRoomClick = () => {
+
+    User.setUserName(self.join.userName);
+    User.setRoomPassword(self.join.roomPassword);
+    self.joinRoom();
+
+  }
+
   //for user room authentication if the user isn't authenticated yet
-  self.joinRoom = function(){
+  self.joinRoom = () => {
 
     if(!User.getUserName()) {
-       alert('TODO: popup no username');
+      $('#joinModal').modal('show');
       return;
     }
 
@@ -106,15 +118,13 @@ angular.module('RoomController', [])
 
 
       if(data.success){
-
+          $('#joinModal').modal('hide');
         enableConnection();
         return;
 
       } else {
 
-        console.log(data);
-        //TODO: popup for auth details again
-        alert('TODO: popup');
+        self.validationMessage = data.message;
       }
     });
   }
