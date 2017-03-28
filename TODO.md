@@ -8,4 +8,4 @@
 - [ ] Validation
 
 ### BACKEND
-- [ ] Room deletion once empty
+- [x] ~~Room deletion once empty~~ (Deferred.. For future updates, its probably better if the room just expires after a period of inactivity)
