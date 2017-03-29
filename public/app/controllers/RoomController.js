@@ -98,7 +98,7 @@ angular.module('RoomController', [])
   }
 
   self.joinRoomClick = () => {
-    
+
     User.setUserName(self.join.userName);
     User.setRoomPassword(self.join.roomPassword);
     self.joinRoom();
@@ -185,6 +185,15 @@ angular.module('RoomController', [])
 
     }, false);
   }
+
+  $('#slide').click(function(){
+    var hidden = $('.chatPanel');
+    if (hidden.hasClass('visible')){
+        hidden.animate({"right":"-1000px"}, "slow").removeClass('visible');
+    } else {
+        hidden.animate({"right":"0px"}, "slow").addClass('visible');
+    }
+    });
 
 }])
 

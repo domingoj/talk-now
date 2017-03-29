@@ -24,6 +24,8 @@
 	width: 100%;
 	background-color: #f8f8f8;
   padding: 0px;
+	 z-index:1;
+	 float: right;
 
 }
 
@@ -91,7 +93,14 @@ canvas {
 	height: 100%;
 	width: 20%;
 	border: 1px solid black;
-	display: none;
+	z-index:2;
+	position:absolute;
+	right: -1000px;
+	background: #FFF;
+}
+
+.clear {
+    clear:both;
 }
 
 .top_menu {
@@ -111,13 +120,13 @@ canvas {
 
 #chatMessagesWindow {
 	border: 1px solid black;
-	height: 80%;
+	height: 70%;
   border: 1px;
 }
 
 #newChatMessageWindow {
 	border: 1px solid black;
-	height:10%;
+	height:20%;
 	margin-top: 10px;
 	bottom: 10px;
 	margin-bottom: 0px;
