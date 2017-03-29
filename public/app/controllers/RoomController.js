@@ -186,6 +186,8 @@ angular.module('RoomController', [])
     }, false);
   }
 
+
+  // chat panel slider 
   $('#slide').click(function(){
     var hidden = $('.chatPanel');
     if (hidden.hasClass('visible')){
