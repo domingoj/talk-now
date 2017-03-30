@@ -1,31 +1,25 @@
 'use strict';
 
-angular.module('app.routes', ['ngRoute'])
+angular.module('app.routes', ['ngRoute']).config(function($routeProvider, $locationProvider) {
 
-.config(function($routeProvider, $locationProvider){
+    $routeProvider
 
-	$routeProvider
+    // home page route
+        .when('/', {
+        templateUrl: 'app/views/pages/home.html',
+        controller: 'homeController',
+        controllerAs: 'home'
 
-	// home page route
-	.when('/', {
-		templateUrl: 'app/views/pages/home.html',
-		controller: 'homeController',
-			controllerAs: 'home'
-			
-	})
+    })
 
-	//room route
-	.when('/rooms/:room_id', {
-		templateUrl: 'app/views/pages/room.html',
-		controller: 'roomController',
-			controllerAs: 'room'
-			
-	})
+    //room route
+        .when('/rooms/:room_id', {
+        templateUrl: 'app/views/pages/room.html',
+        controller: 'roomController',
+        controllerAs: 'room'
 
-	.otherwise({
-        redirectTo: '/'
-    });
+    }).otherwise({redirectTo: '/'});
 
-	// get rid of the hash in the URL
-	$locationProvider.html5Mode(true);		
+    // get rid of the hash in the URL
+    $locationProvider.html5Mode(true);
 });

@@ -1,113 +1,109 @@
 <div id="main-content">
-<div class="jumbotron">
-	<div class="container">
+	<div class="jumbotron">
+		<div class="container">
 
-		<div class="row">
-			<div class="col-md-6">
-		        <h1>Hassle-Free Hangouts and Meetings.</h1>
-		        <p>Talk Now! is the easiest way to talk to your friends. Just find a room and start talking. That simple.</p>
+			<div class="row">
+				<div class="col-md-6">
+					<h1>Hassle-Free Hangouts and Meetings.</h1>
+					<p>Talk Now! is the easiest way to talk to your friends. Just find a room and start talking. That simple.</p>
+				</div>
+				<div class="col-md-6">
+					<!--BUTTONS-->
+					<div id="buttons">
+						<div class="row">
+							<!-- Trigger the create a room modal with a button -->
+							<a class="btn btn-lg btn-primary btn-block round" role="button" data-toggle="modal" data-target="#createModal" id="btn-create">Create a room</a>
+						</div>
+						<div class="row">
+							<!-- Trigger the create a room modal with a button -->
+							<a class="btn btn-lg btn-primary btn-block round" role="button" data-toggle="modal" data-target="#joinModal" id="btn-join">Join a room</a>
+						</div>
+					</div>
+					<!--END BUTTONS-->
+				</div>
 
-		        
-	        </div>
-	        <div class="col-md-6">
-	        <!--BUTTONS-->
-		        <div id="buttons">
-			        <div class="row">
-			            <!-- Trigger the create a room modal with a button -->
-						<a class="btn btn-lg btn-primary btn-block round" role="button" data-toggle="modal" data-target="#createModal" id="btn-create">Create a room</a>
-			        </div>
-			         <div class="row">
-			            <!-- Trigger the create a room modal with a button -->
-						<a class="btn btn-lg btn-primary btn-block round" role="button" data-toggle="modal" data-target="#joinModal" id="btn-join">Join a room</a>
-			        </div>
-		        </div>
-		        <!--END BUTTONS-->
-	        </div>
-
-	      </div>
+			</div>
+		</div>
 	</div>
-</div>
+
+	<!-- Create a room modal -->
+	<div id="createModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Create a Room</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="roomNameCreate">Room name</label>
+						<input type="form-text" class="form-control" id="roomNameCreate" placeholder="Enter room name" ng-model="home.create.roomName">
+						<small id="nameHep" class="form-text text-muted">Be unique! E.g. gallileo_nov1</small>
+					</div>
+
+					<div class="form-group">
+						<label for="roomPasswordCreate">Room Password(Optional)</label>
+						<input type="password" class="form-control" id="roomPasswordCreate" placeholder="Password" ng-model="home.create.roomPassword">
+						<small id="passwordHelp" class="form-text text-muted">Optional if you are creative with your room name. But recommended nonetheless.</small>
+					</div>
+
+					<div class="form-group">
+						<label for="yourNameCreate">Your name</label>
+						<input type="form-text" class="form-control" id="yourNameCreate" placeholder="Enter your name" ng-model="home.create.userName">
+						<small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					{{home.validationMessage}}
+					<button type="button" class="btn btn-default" ng-click="home.createRoom()">Create</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 
-<!-- Create a room modal -->
-<div id="createModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+	<!-- Join a room modal -->
+	<div id="joinModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Create a Room</h4>
-      </div>
-      <div class="modal-body">
-      	<div class="form-group">
-		    <label for="roomNameCreate">Room name</label>
-		    <input type="form-text" class="form-control" id="roomNameCreate" placeholder="Enter room name" ng-model="home.create.roomName">
-		    <small id="nameHep" class="form-text text-muted">Be unique! E.g. gallileo_nov1</small>
-	  	</div>
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Join a Room</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="roomNameJoin">Room name</label>
+						<input type="form-text" class="form-control" id="roomNameJoin" placeholder="Enter room name" ng-model="home.join.roomName">
+						<small id="nameHelp" class="form-text text-muted">Name of the room you wanna join in.</small>
+					</div>
 
-	  	<div class="form-group">
-		    <label for="roomPasswordCreate">Room Password(Optional)</label>
-		    <input type="password" class="form-control" id="roomPasswordCreate" placeholder="Password" ng-model="home.create.roomPassword">
-		    <small id="passwordHelp" class="form-text text-muted">Optional if you are creative with your room name. But recommended nonetheless.</small>
-		 </div>
+					<div class="form-group">
+						<label for="roomPasswordJoin">Room Password</label>
+						<input type="password" class="form-control" id="roomPasswordJoin" placeholder="Password" ng-model="home.join.roomPassword">
+						<small id="passwordHelp" class="form-text text-muted">If the room owner requires a password, put it here.</small>
+					</div>
 
-	  	<div class="form-group">
-		    <label for="yourNameCreate">Your name</label>
-		    <input type="form-text" class="form-control" id="yourNameCreate" placeholder="Enter your name" ng-model="home.create.userName">
-		    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
-	  	</div>
-      </div>
-
-      <div class="modal-footer">
-      {{home.validationMessage}}
-       <button type="button" class="btn btn-default" ng-click="home.createRoom()">Create</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- Join a room modal -->
-<div id="joinModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Join a Room</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-		    <label for="roomNameJoin">Room name</label>
-		    <input type="form-text" class="form-control" id="roomNameJoin" placeholder="Enter room name" ng-model="home.join.roomName">
-		    <small id="nameHelp" class="form-text text-muted">Name of the room you wanna join in.</small>
-	  	</div>
-
-	  	<div class="form-group">
-		    <label for="roomPasswordJoin">Room Password</label>
-		    <input type="password" class="form-control" id="roomPasswordJoin" placeholder="Password" ng-model="home.join.roomPassword">
-		    <small id="passwordHelp" class="form-text text-muted">If the room owner requires a password, put it here.</small>
-		 </div>
-
-	  	<div class="form-group">
-		    <label for="yourNameJoin">Your name</label>
-		    <input type="form-text" class="form-control" id="yourNameJoin" placeholder="Enter your name" ng-model="home.join.userName">
-		    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
-	  	</div>
-      </div>
-      <div class="modal-footer">
-       {{home.validationMessage}}
-       <button type="button" class="btn btn-default" ng-click="home.joinRoom()">Join</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+					<div class="form-group">
+						<label for="yourNameJoin">Your name</label>
+						<input type="form-text" class="form-control" id="yourNameJoin" placeholder="Enter your name" ng-model="home.join.userName">
+						<small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
+					</div>
+				</div>
+				<div class="modal-footer">
+					{{home.validationMessage}}
+					<button type="button" class="btn btn-default" ng-click="home.joinRoom()">Join</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <link rel="stylesheet" href="assets/css/home.styling.css">

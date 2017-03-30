@@ -1,79 +1,70 @@
 'use strict';
 
-angular.module('HomeController', [])
+angular.module('HomeController', []).controller('homeController', function($scope, $location, Room, User, Auth) {
 
-.controller('homeController', function($scope, $location, Room, User, Auth){
+    let self = this;
 
-	let self = this;
+    self.create = {
+        roomName: '',
+        roomPassword: '',
+        userName: ''
+    };
+    self.join = {
+        roomName: '',
+        roomPassword: '',
+        userName: ''
+    };
 
-	self.create = {
-		roomName: '',
-		roomPassword: '',
-		userName: ''
-	};
-	self.join = {
-		roomName: '',
-		roomPassword: '',
-		userName: ''
-	};
+    self.validationMessage = '';
 
-	self.validationMessage = '';
+    self.createRoom = () => {
 
-	self.createRoom = () => {
+        Room.create(self.create).then(function(response) {
 
-		Room.create(self.create)
-			.then(function(response){
+            let data = response.data;
 
-				let data = response.data;
+            if (data.success) {
 
-				if(data.success){
+                User.setUser(self.create);
 
-					User.setUser(self.create);
+                console.log(User.getRoomPassword());
 
-					console.log(User.getRoomPassword());
+                //hide the modal
+                $('#createModal').modal('hide');
 
-					//hide the modal
-					$('#createModal').modal('hide');
+                //redirect to the room page
+                $location.path('/rooms/' + data.room.name);
+            } else {
 
-					//redirect to the room page
-					$location.path('/rooms/' + data.room.name);
-				}
+                //room already in the db, cant create same name
+                if (data.messageCode === 11000) {
+                    self.validationMessage = data.//something weird happened
+                    message;
+                } else {
+                    self.validationMessage = 'Oops, something went wrong. Please try again';
+                }
+            }
+        });
+    }
 
-				else {
+    self.joinRoom = () => {
 
-					//room already in the db, cant create same name
-					if(data.messageCode === 11000){
-						self.validationMessage = data.message;
-					}
+        Auth.joinRoom(self.join).then(function(data) {
 
-					//something weird happened
-					else {
-						self.validationMessage = 'Oops, something went wrong. Please try again';
-					}
-				}
-			});
-	}
+            if (data.success) {
+                //hide the modal
+                $('#joinModal').modal('hide');
 
+                //set user-room details
+                User.setUser(self.join);
 
-	self.joinRoom = () => {
+                //move to room page
+                $location.path('/rooms/' + User.getRoom());
 
-	    Auth.joinRoom(self.join)
-	    .then(function(data){
-
-	      if(data.success){
-	      		//hide the modal
-				$('#joinModal').modal('hide');
-
-				//set user-room details
-		      	User.setUser(self.join);
-
-		   		//move to room page
-		        $location.path('/rooms/' + User.getRoom());
-
-	      } else {
-	        self.validationMessage = data.message;
-	      }
-	    });
-	}
+            } else {
+                self.validationMessage = data.message;
+            }
+        });
+    }
 
 });

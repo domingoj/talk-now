@@ -1,69 +1,61 @@
 body {
-
-background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("../img/bg1.png");
-background-position: center center;
-background-repeat: no-repeat;
-background-attachment: fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+    background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url('../img/bg1.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-
 
 .navbar {
     background: transparent;
 }
 
-
-
-#main-content{
-
-	margin-top: 10px;
-	font-family: "Calibri", "Roboto", sans-serif;
-	padding: 0;
+#main-content {
+    font-family: 'Calibri', 'Roboto', sans-serif;
+    margin-top: 10px;
+    padding: 0;
 }
 
 .jumbotron {
-	color: #fff;
-
+    color: #fff;
 }
 
 #buttons {
-	margin-top: 25%;
-	text-align: center;
+    margin-top: 25%;
+    text-align: center;
 }
 
 .btn {
-	margin-top: 5px;
-	border-radius: 5px;
-	height: 50px;
+    height: 50px;
+    margin-top: 5px;
+    border-radius: 5px;
 }
 
 #btn-create {
-	background-color: #1a8cff;
+    background-color: #1a8cff;
 }
 
 #btn-join {
-	background-color: #ff4d88;
+    background-color: #ff4d88;
 }
 
-#btn-create:hover{
-	background-color: #0080ff;
+#btn-create:hover {
+    background-color: #0080ff;
 }
 
-#btn-join:hover{
-	background-color: #ff3377;
+#btn-join:hover {
+    background-color: #f37;
 }
 
 .jumbotron {
-	background: transparent;
+    background: transparent;
 }
 
-
-
 @media (max-width: 970px) {
-  #buttons {
-	margin-top: 10%;
-	}
+    #buttons {
+        margin-top: 10%;
+    }
 }

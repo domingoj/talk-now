@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Talk Now!</title>
+	<meta charset="UTF-8">
+	<title>Talk Now!</title>
 
-<!--FOR ANGULAR ROUTING -->
-<base href="/">
+	<!--FOR ANGULAR ROUTING -->
+	<base href="/">
 
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
 
-<!-- FOR SOCKET IO -->
-<script src="socket.io/socket.io.js"></script>
+	<!-- FOR SOCKET IO -->
+	<script src="socket.io/socket.io.js"></script>
 
-<!-- FOR BOOTSTRAP -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="assets/libs/bootbox.min.js"></script>
+	<!-- FOR BOOTSTRAP -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="assets/libs/bootbox.min.js"></script>
 
-<!-- brand font -->
-<link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
+	<!-- brand font -->
+	<link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
 
-<!-- Simple webrtc for video/audio -->
-<script src="https://simplewebrtc.com/latest-v2.js"></script>
+	<!-- Simple webrtc for video/audio -->
+	<script src="https://simplewebrtc.com/latest-v2.js"></script>
 
-<!-- main Angular app files -->
-<script src="app/app.routes.js"></script>
-<script src="app/app.js"></script>
+	<!-- main Angular app files -->
+	<script src="app/app.routes.js"></script>
+	<script src="app/app.js"></script>
 
-<!--controllers -->
-<script src="app/controllers/HomeController.js"></script>
-<script src="app/controllers/RoomController.js"></script>
+	<!--controllers -->
+	<script src="app/controllers/HomeController.js"></script>
+	<script src="app/controllers/RoomController.js"></script>
 
-<!-- services -->
-<script src="app/services/AuthService.js"></script>
-<script src="app/services/RoomService.js"></script>
-<script src="app/services/UserService.js"></script>
+	<!-- services -->
+	<script src="app/services/AuthService.js"></script>
+	<script src="app/services/RoomService.js"></script>
+	<script src="app/services/UserService.js"></script>
 
-<!--custom styling-->
-<script src="assets/js/global.styling.js"></script>
-<link rel="stylesheet" href="assets/css/global.styling.css">
+	<!--custom styling-->
+	<script src="assets/js/global.styling.js"></script>
+	<link rel="stylesheet" href="assets/css/global.styling.css">
 
 </head>
 
@@ -49,23 +50,23 @@
 	<nav class="navbar navbar-default" id="navigation">
 		<div class="container">
 			<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
 
 				<a class="navbar-brand" href="/">
-	        		<b>Talk Now!</b>
-	      		</a>
+					<b>Talk Now!</b>
+				</a>
 			</div>
 
 			<div id="navbar" class="navbar-collapse collapse">
-           <ul class="nav navbar-nav navbar-right navbar-collapse">
-	            <li><a href="/">About</a></li>
-	            <li><a href="/TermsAndConditions/">Terms and Conditions</a></li>
-	          	</ul>
-          </div>
+				<ul class="nav navbar-nav navbar-right navbar-collapse">
+					<li><a href="/">About</a></li>
+					<li><a href="/TermsAndConditions/">Terms and Conditions</a></li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
@@ -73,4 +74,5 @@
 	<div ng-view id="content-window"></div>
 
 </body>
+
 </html>

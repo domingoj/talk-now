@@ -1,210 +1,219 @@
 'use strict';
 
-angular.module('RoomController', [])
+angular.module('RoomController', []).controller('roomController', [
+    '$scope',
+    '$routeParams',
+    '$location',
+    'User',
+    'Auth',
+    'Room',
+    function($scope, $routeParams, $location, User, Auth, Room) {
 
-.controller('roomController',['$scope','$routeParams', '$location', 'User', 'Auth', 'Room', function($scope, $routeParams, $location, User, Auth, Room){
+        let self = this;
+        self.join = {
+            userName: User.getUserName(),
+            roomPassword: User.getRoomPassword()
+        }
+        self.newMessage = '';
 
-  let self = this;
-  self.join = {
-    userName: User.getUserName(),
-    roomPassword: User.getRoomPassword()
-  }
-  self.newMessage = '';
+        if (!User.getRoom()) {
+            User.setRoom($routeParams.room_id);
+        }
 
-  if(!User.getRoom()){
-    User.setRoom($routeParams.room_id);
-  }
+        self.roomName = User.getRoom();
 
-  self.roomName = User.getRoom();
+        function enableConnection() {
 
-  function enableConnection() {
+            let socket = io('http://localhost:3000' + '/room');
 
-    let socket = io('http://localhost:3000' + '/room');
+            socket.on('connect', () => {
 
-    socket.on('connect', () => {
+                socket.emit('join', {roomId: User.getRoom()});
+            });
 
-        socket.emit('join', {
-          roomId: User.getRoom()
+            self.sendMessage = () => {
+
+                socket.emit('chat message', {
+                    message: self.newMessage,
+                    roomId: User.getRoom(),
+                    user: User.getUserName()
+                });
+
+                $('#messages').append($('<li>').addClass('self').text(self.newMessage));
+
+                self.newMessage = '';
+                $('#messages').animate({
+                    scrollTop: $('#messages').prop('scrollHeight')
+                }, 300);
+            }
+
+            socket.on('chat message', function(data) {
+
+                $('#messages').append($('<li>').addClass('others').html('<b>' + data.user + "</b> : " + data.message));
+                $('#messages').animate({
+                    scrollTop: $('#messages').prop('scrollHeight')
+                }, 300);
+
+            });
+
+            let webrtc = new SimpleWebRTC({
+                // the id/element dom element that will hold "our" video
+                localVideoEl: 'localVideo',
+
+                // the id/element dom element that will hold remote videos
+                remoteVideosEl: '',
+
+                // immediately ask for camera access
+                autoRequestMedia: true
+            });
+
+            // a peer video has been added
+            webrtc.on('videoAdded', function(video, peer) {
+
+                var remotes = document.getElementById('remotes');
+
+                if (remotes) {
+                    var container = document.createElement('div');
+                    container.className = 'videoContainer';
+                    container.id = 'container_' + webrtc.getDomId(peer);
+                    container.appendChild(video);
+
+                    // suppress contextmenu
+                    video.oncontextmenu = function() {
+                        return false;
+                    };
+
+                    remotes.appendChild(container);
+                }
+            });
+
+            // a peer video was removed
+            webrtc.on('videoRemoved', function(video, peer) {
+
+                var remotes = document.getElementById('remotes');
+                var el = document.getElementById(peer
+                    ? 'container_' + webrtc.getDomId(peer)
+                    : 'localScreenContainer');
+                if (remotes && el) {
+                    remotes.removeChild(el);
+                }
+            });
+
+            // we have to wait until it's ready
+            webrtc.on('readyToCall', function() {
+
+                // you can name it anything
+                webrtc.joinRoom(User.getRoom());
+            });
+        }
+
+        self.joinRoomClick = () => {
+
+            User.setUserName(self.join.userName);
+            User.setRoomPassword(self.join.roomPassword);
+            self.joinRoom();
+
+        }
+
+        //for user room authentication if the user isn't authenticated yet
+        self.joinRoom = () => {
+
+            if (!User.getUserName()) {
+                $('#joinModal').modal('show');
+                return;
+            }
+
+            Auth.joinRoom(User.getUser()).then(function(data) {
+
+                if (data.success) {
+                    $('#joinModal').modal('hide');
+                    enableConnection();
+                    return;
+
+                } else {
+
+                    self.validationMessage = data.message;
+                }
+            });
+        }
+
+        Room.get(User.getRoom()).then(function(result) {
+
+            let data = result.data;
+            if (data.success) {
+
+                //if room is present
+                //try to join the room
+                self.joinRoom();
+
+            } else {
+                $location.path('/');
+            }
         });
-      });
 
-    self.sendMessage = () => {
+        let videotags = Array.from(document.getElementsByTagName('video'));
+        let canvas = document.getElementById('selectedVideo');
+        let context = canvas.getContext('2d');
 
-      socket.emit('chat message', {
-        message: self.newMessage,
-        roomId: User.getRoom(),
-        user: User.getUserName()
-      });
+        //for redrawing of the canvas to make it appear like a video
+        //http://stackoverflow.com/questions/24496605/how-can-i-show-the-same-html-5-video-twice-on-a-website-without-loading-it-twice
+        const updateSelectedVideo = (v, c, w, h) => {
 
-      $('#messages').append($('<li>').addClass('self').text(self.newMessage));
+            if (v.paused || v.ended)
+                return false;
+            c.drawImage(v, 0, 0, w, h);
+            setTimeout(updateSelectedVideo, 20, v, c, w, h);
 
-      self.newMessage = '';
-      $('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
-    }
-
-    socket.on('chat message', function(data){
-
-      $('#messages').append($('<li>').addClass('others').html('<b>' + data.user + "</b> : " + data.message));
-      $('#messages').animate({ scrollTop: $('#messages').prop('scrollHeight') }, 300);
-
-    });
-
-    let webrtc = new SimpleWebRTC({
-        // the id/element dom element that will hold "our" video
-        localVideoEl: 'localVideo',
-
-        // the id/element dom element that will hold remote videos
-        remoteVideosEl: '',
-
-        // immediately ask for camera access
-        autoRequestMedia: true
-    });
-
-
-    // a peer video has been added
-    webrtc.on('videoAdded', function (video, peer) {
-
-      var remotes = document.getElementById('remotes');
-
-      if (remotes) {
-          var container = document.createElement('div');
-          container.className = 'videoContainer';
-          container.id = 'container_' + webrtc.getDomId(peer);
-          container.appendChild(video);
-
-          // suppress contextmenu
-          video.oncontextmenu = function () { return false; };
-
-          remotes.appendChild(container);
         }
-    });
 
-    // a peer video was removed
-    webrtc.on('videoRemoved', function (video, peer) {
+        //loops through all the video tags and adds a click listener to them
+        for (var i = 0; i < videotags.length; i++) {
 
-        var remotes = document.getElementById('remotes');
-        var el = document.getElementById(peer ? 'container_' + webrtc.getDomId(peer) : 'localScreenContainer');
-        if (remotes && el) {
-            remotes.removeChild(el);
+            videotags[i].addEventListener('click', function(e) {
+
+                //grabs the clicked element 'target'
+                e = e || window.event;
+                let target = e.target || e.srcElement;
+
+                //for clearing the canvas on click of other elements
+                //http://stackoverflow.com/questions/9522341/how-to-redraw-canvas-every-250ms-without-flickering-between-each-redraw
+                //TODO: add click event listener to new videos once a new user joins
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                //take the height of the video
+                let cw = Math.floor(canvas.clientWidth);
+                let ch = Math.floor(canvas.clientHeight);
+                canvas.width = cw;
+                canvas.height = ch;
+
+                updateSelectedVideo(target, context, cw, ch);
+
+            }, false);
         }
-    });
 
-    // we have to wait until it's ready
-    webrtc.on('readyToCall', function () {
+        // chat panel slider
+        $('#slide').click(function() {
+            var hidden = $('#chat-panel');
+            if (hidden.hasClass('visible')) {
+                hidden.animate({
+                    "right": "-1000px"
+                }, "slow").removeClass('visible');
+            } else {
+                hidden.animate({
+                    "right": "0px"
+                }, "slow").addClass('visible');
+            }
+        });
 
-      // you can name it anything
-      webrtc.joinRoom(User.getRoom());
-    });
-  }
-
-  self.joinRoomClick = () => {
-
-    User.setUserName(self.join.userName);
-    User.setRoomPassword(self.join.roomPassword);
-    self.joinRoom();
-
-  }
-
-  //for user room authentication if the user isn't authenticated yet
-  self.joinRoom = () => {
-
-    if(!User.getUserName()) {
-      $('#joinModal').modal('show');
-      return;
     }
-
-    Auth.joinRoom(User.getUser())
-    .then(function(data){
-
-
-      if(data.success){
-          $('#joinModal').modal('hide');
-        enableConnection();
-        return;
-
-      } else {
-
-        self.validationMessage = data.message;
-      }
-    });
-  }
-
-  Room.get(User.getRoom())
-    .then(function(result){
-
-      let data = result.data;
-      if(data.success){
-
-        //if room is present
-        //try to join the room
-        self.joinRoom();
-
-      } else {
-        $location.path('/');
-      }
-    });
-
-
-
-  let videotags = Array.from(document.getElementsByTagName('video'));
-  let canvas = document.getElementById('selectedVideo');
-  let context = canvas.getContext('2d');
-
-  //for redrawing of the canvas to make it appear like a video
-  //http://stackoverflow.com/questions/24496605/how-can-i-show-the-same-html-5-video-twice-on-a-website-without-loading-it-twice
-  const updateSelectedVideo = (v,c,w,h) => {
-
-    if(v.paused || v.ended) return false;
-    c.drawImage(v,0,0,w,h);
-    setTimeout(updateSelectedVideo,20,v,c,w,h);
-
-  }
-
-  //loops through all the video tags and adds a click listener to them
-  for(var i = 0; i < videotags.length; i++){
-
-    videotags[i].addEventListener('click', function(e) {
-
-      //grabs the clicked element 'target'
-      e = e || window.event;
-      let target = e.target || e.srcElement;
-
-      //for clearing the canvas on click of other elements
-      //http://stackoverflow.com/questions/9522341/how-to-redraw-canvas-every-250ms-without-flickering-between-each-redraw
-      //TODO: add click event listener to new videos once a new user joins
-      context.clearRect(0, 0, canvas.width, canvas.height);
-
-      //take the height of the video
-      let cw = Math.floor(canvas.clientWidth);
-      let ch = Math.floor(canvas.clientHeight);
-      canvas.width = cw;
-      canvas.height = ch;
-
-      updateSelectedVideo(target,context,cw,ch);
-
-
-    }, false);
-  }
-
-
-  // chat panel slider 
-  $('#slide').click(function(){
-    var hidden = $('.chatPanel');
-    if (hidden.hasClass('visible')){
-        hidden.animate({"right":"-1000px"}, "slow").removeClass('visible');
-    } else {
-        hidden.animate({"right":"0px"}, "slow").addClass('visible');
-    }
-    });
-
-}])
+])
 
 // custom directive for 'Enter' press on the new chat box text area
-.directive('myEnter', function() {
-   return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
+    .directive('myEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if (event.which === 13) {
+                scope.$apply(function() {
                     scope.$eval(attrs.myEnter);
                 });
 
