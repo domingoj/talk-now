@@ -1,36 +1,29 @@
 <link rel="stylesheet" href="assets/css/room.styling.css">
 
-
-<div class="clear"></div>
-
 <a href="#" id="slide">Show/hide Chat Panel</a>
-
 
 <div class="container main-content">
 
-			<div id="videos-panel">
-				<div id="selected-video-container">
-					<canvas id="selectedVideo"></canvas>
-				</div>
-				<div id="videos-row">
-					<div id="remotes"></div>
-					<div id="local-video">
-						<video id="localVideo"></video>
-					</div>
-				</div>
+	<div id="videos-panel">
+		<div id="selected-video-container">
+			<canvas id="selectedVideo"></canvas>
+		</div>
+		<div id="videos-row">
+			<div id="remotes"></div>
+			<div id="local-video">
+				<video id="localVideo"></video>
 			</div>
+		</div>
+	</div>
 
-		<div class="chatPanel">
-			<div class="top_menu">
-				<div class="title">{{room.roomName}} Chatroom</div>
-			</div>
-
-			<div id="chatMessagesWindow">
-				<ul id="messages">
-				</ul>
-			</div>
-
-			<div id="newChatMessageWindow">
+	<div id="chat-panel">
+		<div class="top_menu">
+			<div class="title">{{room.roomName}} Chatroom</div>
+		</div>
+		<ul id="messages">
+		</ul>
+		<div class="bottom_wrapper clearfix">
+			<div id="messages-input-wrapper">
 				<div>
 					<textarea class="message_input" placeholder="Type your message here..." ng-model="room.newMessage" my-enter="room.sendMessage()"></textarea>
 				</div>
@@ -39,36 +32,37 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div style="clear: both;"></div>
 
-		<!-- Join a room modal -->
-		<div id="joinModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-		  <div class="modal-dialog">
+	<!-- Join a room modal -->
+	<div id="joinModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
 
-		    <!-- Modal content-->
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h4 class="modal-title">Join a Room</h4>
-		      </div>
-		      <div class="modal-body">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Join a Room</h4>
+				</div>
+				<div class="modal-body">
 
-				  	<div class="form-group">
-					    <label for="roomPasswordJoin">Room Password</label>
-					    <input type="password" class="form-control" id="roomPasswordJoin" placeholder="Password" ng-model="room.join.roomPassword">
-					    <small id="passwordHelp" class="form-text text-muted">If the room owner requires a password, put it here.</small>
-					 	</div>
+					<div class="form-group">
+						<label for="roomPasswordJoin">Room Password</label>
+						<input type="password" class="form-control" id="roomPasswordJoin" placeholder="Password" ng-model="room.join.roomPassword">
+						<small id="passwordHelp" class="form-text text-muted">If the room owner requires a password, put it here.</small>
+					</div>
 
-				  	<div class="form-group">
-					    <label for="yourNameJoin">Your name</label>
-					    <input type="form-text" class="form-control" id="yourNameJoin" placeholder="Enter your name" ng-model="room.join.userName">
-					    <small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
-				  	</div>
-		      </div>
-		      <div class="modal-footer">
-		       {{room.validationMessage}}
-		       <button type="button" class="btn btn-default" ng-click="room.joinRoomClick()">Join</button>
-		      </div>
-		    </div>
-
-		  </div>
+					<div class="form-group">
+						<label for="yourNameJoin">Your name</label>
+						<input type="form-text" class="form-control" id="yourNameJoin" placeholder="Enter your name" ng-model="room.join.userName">
+						<small id="nameHep" class="form-text text-muted">This will be shown to the other people on the room.</small>
+					</div>
+				</div>
+				<div class="modal-footer">
+					{{room.validationMessage}}
+					<button type="button" class="btn btn-default" ng-click="room.joinRoomClick()">Join</button>
+				</div>
+			</div>
 		</div>
 	</div>
+</div>
