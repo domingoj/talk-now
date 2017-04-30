@@ -1,5 +1,5 @@
 # talk-now
-<b>*In Progress*</b> A real time web application for hassle-free video call &amp; chat in the browser using WebRTC and socket.io.
+A real time web application for hassle-free video call &amp; chat in the browser using WebRTC and socket.io.
 
 # This project is discontinued indeterminately. Reasons:
 1. I kind of lost interest in WebRTC as the documentation is messy and outdated.
