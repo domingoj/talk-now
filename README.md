@@ -1,10 +1,11 @@
-# talk-now
+# talk-now (discontinued)
 A real time web application for hassle-free video call &amp; chat in the browser using WebRTC and socket.io.
 
 # Current Functionalities
+Note: this project is not being maintained anymore. Any version changes in services it depends on might cause this project to break.
 1. Users are able to create a room/join a room that is password protected (or not).
-2. Room Video call .
-3. Room Chat.
+2. Room Video call multiple users.
+3. Room Chat for multiple users.
 
 # Tech stack used so far: 
 <ul>
